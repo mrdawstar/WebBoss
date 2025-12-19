@@ -103,9 +103,12 @@ const PortfolioSection = () => {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {projects.map((project, index) => (
-            <motion.div
+            {projects.map((project, index) => (
+            <motion.a
               key={project.id}
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{
                 opacity: 0,
                 y: 60,
@@ -127,7 +130,7 @@ const PortfolioSection = () => {
                 y: -8,
                 transition: { duration: 0.3 }
               }}
-              className="relative group"
+              className="relative group block no-underline text-foreground hover:text-foreground" // Ważne style
             >
               {/* Card */}
               <div className="relative h-full rounded-3xl overflow-hidden border border-border bg-background/50 backdrop-blur-sm shadow-lg shadow-black/5 group-hover:shadow-xl group-hover:shadow-primary/10 transition-all duration-500">
@@ -159,7 +162,7 @@ const PortfolioSection = () => {
                     {/* Gradient Overlay */}
                     <div className={`absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                     
-                    {/* Hover Overlay */}
+                    {/* Hover Overlay - USUŃ link z tego miejsca */}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-end p-6">
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -181,18 +184,12 @@ const PortfolioSection = () => {
                         </p>
                       </motion.div>
                       
-                      <motion.a
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        whileHover={{ opacity: 1, scale: 1 }}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-lg hover:shadow-xl hover:shadow-primary/20 transition-all duration-300"
-                      >
+                      {/* ZMIEŃ ten link na div z przyciskiem */}
+                      <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-lg">
                         <Eye className="w-4 h-4" />
                         Zobacz na żywo
                         <ExternalLink className="w-4 h-4" />
-                      </motion.a>
+                      </div>
                     </div>
                   </div>
                   
@@ -215,19 +212,14 @@ const PortfolioSection = () => {
                     {project.title}
                   </h3>
                   
-                  {/* URL Link */}
+                  {/* URL Link - ZMIEŃ na div */}
                   <div className="flex items-center justify-between">
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                    >
+                    <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
                       <span className="truncate max-w-[200px]">
                         {project.url.replace("https://", "")}
                       </span>
                       <ArrowRight className="w-3 h-3" />
-                    </a>
+                    </div>
                     
                     <motion.div
                       whileHover={{ rotate: 90 }}
@@ -244,7 +236,7 @@ const PortfolioSection = () => {
                 </div>
               </div>
 
-              {/* Floating Elements */}
+              {/* Floating Elements - pozostają bez zmian */}
               <motion.div
                 animate={{ 
                   y: [0, -10, 0],
@@ -270,7 +262,7 @@ const PortfolioSection = () => {
                 }}
                 className={`absolute -bottom-3 -left-3 w-8 h-8 rounded-full bg-gradient-to-r ${project.gradient} opacity-15 group-hover:opacity-30 transition-opacity duration-500`}
               />
-            </motion.div>
+            </motion.a>
           ))}
         </div>
 
