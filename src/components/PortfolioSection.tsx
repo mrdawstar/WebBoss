@@ -5,49 +5,50 @@ import { useRef } from "react";
 import { ExternalLink, Monitor, Sparkles, Eye, ArrowRight } from "lucide-react";
 
 const projects = [
-
   {
     id: 1,
-    title: "Kancelaria Adwokacka – Anna Szydłowska",
-    category: "Kancelaria prawna",
+    title: "Kancelaria Adwokacka – Anna Szydłowska Warszawa",
+    category: "Kancelaria prawna w Warszawie",
     url: "https://adwokat-anna-szydlowska.vercel.app",
     gradient: "from-amber-500 to-orange-600",
     image: "/www2.png",
-    description: "Profesjonalny portal dla kancelarii adwokackiej",
-    features: ["Strefa klienta", "Blog prawny", "System terminów"]
+    description: "Profesjonalny portal dla kancelarii adwokackiej w Warszawie - strona WWW dla prawnika",
+    features: ["Strefa klienta", "Blog prawny", "System terminów", "SEO dla kancelarii"],
+    seoKeywords: ["kancelaria adwokacka Warszawa", "strona dla prawnika", "adwokat strona WWW", "prawnik online Warszawa"]
   },
   {
     id: 2,
-    title: "Firma Remontowa – Marek Gadzicki",
-    category: "Usługi remontowe",
+    title: "Firma Remontowa – Marek Gadzicki Warszawa",
+    category: "Usługi remontowe w Warszawie",
     url: "https://marekgadzicki.vercel.app",
     gradient: "from-blue-500 to-indigo-600",
     image: "/www1.png",
-    description: "Kompleksowa prezentacja usług remontowych",
-    features: ["Kalkulator wyceny", "Mapa realizacji", "Opinie klientów"]
+    description: "Kompleksowa prezentacja usług remontowych dla firmy z Warszawy - nowoczesna strona remontowa",
+    features: ["Kalkulator wyceny", "Mapa realizacji", "Opinie klientów", "Responsywność"],
+    seoKeywords: ["firma remontowa Warszawa", "usługi remontowe strona", "remonty Warszawa WWW", "wycena remontów online"]
   },
-
-      {
+  {
     id: 3,
-    title: "ZBOIS Remonty",
-    category: "Firma remontowa",
+    title: "ZBOIS Remonty Warszawa",
+    category: "Firma remontowa z Warszawy",
     url: "https://zbois-remonty-vercel.vercel.app",
     gradient: "from-emerald-500 to-teal-600",
     image: "/www4.png",
-    description: "Nowoczesna strona dla firmy remontowej z Warszawy",
-    features: ["Responsywność", "Formularz kontaktowy", "Galeria realizacji"]
+    description: "Nowoczesna strona dla firmy remontowej z Warszawy - projektowanie stron dla wykonawców",
+    features: ["Responsywność", "Formularz kontaktowy", "Galeria realizacji", "Optymalizacja SEO"],
+    seoKeywords: ["remonty Warszawa strona", "ZBOIS Remonty", "wykonawca remontów WWW", "firma budowlana Warszawa"]
   },
   {
     id: 4,
     title: "Warszawska Kancelaria – Piotr Stosio",
-    category: "Kancelaria radcy prawnego",
+    category: "Kancelaria radcy prawnego Warszawa",
     url: "https://warszawska-kancelaria-piotr-stosio.vercel.app",
     gradient: "from-purple-500 to-violet-600",
     image: "/www3.png",
-    description: "Elegancka strona dla kancelarii prawnej",
-    features: ["Kontakt 24/7", "Specjalizacje", "Doświadczenie"]
+    description: "Elegancka strona dla kancelarii prawnej w Warszawie - profesjonalne strony dla prawników",
+    features: ["Kontakt 24/7", "Specjalizacje", "Doświadczenie", "Strefa klienta"],
+    seoKeywords: ["kancelaria prawna Warszawa", "radca prawny strona", "prawnik Warszawa WWW", "porady prawne online"]
   },
-
 ];
 
 const PortfolioSection = () => {
@@ -55,7 +56,13 @@ const PortfolioSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="portfolio" className="section-padding relative z-10 overflow-hidden" ref={ref}>
+    <section 
+      id="portfolio" 
+      className="section-padding relative z-10 overflow-hidden" 
+      ref={ref}
+      itemScope
+      itemType="https://schema.org/ItemList"
+    >
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 blur-3xl rounded-full" />
@@ -78,7 +85,7 @@ const PortfolioSection = () => {
           >
             <Sparkles className="w-4 h-4 text-primary" />
             <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-              Portfolio
+              Portfolio realizacji
             </span>
           </motion.div>
           
@@ -88,7 +95,7 @@ const PortfolioSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6"
           >
-            Nasze <span className="text-gradient-primary">realizacje</span>
+            Nasze realizacje stron internetowych w <span className="text-gradient-primary">Warszawie</span>
           </motion.h2>
           
           <motion.p
@@ -97,18 +104,25 @@ const PortfolioSection = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-xl text-muted-foreground"
           >
-            Zobacz, jak pomagamy firmom z Warszawy rozwijać się w internecie
+            Zobacz przykłady profesjonalnych stron WWW dla firm z Warszawy, które stworzyliśmy
           </motion.p>
         </motion.div>
 
+        {/* Schema.org for Portfolio */}
+        <div className="sr-only" itemScope itemType="https://schema.org/CreativeWork">
+          <meta itemProp="name" content="Portfolio stron internetowych WebBoss Warszawa" />
+          <meta itemProp="description" content="Profesjonalne realizacje stron internetowych dla firm z Warszawy wykonane przez WebBoss" />
+          <meta itemProp="keywords" content="portfolio stron WWW Warszawa, realizacje stron internetowych, przykładowe strony firmowe Warszawa" />
+        </div>
+
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            {projects.map((project, index) => (
-            <motion.a
+          {projects.map((project, index) => (
+            <motion.div
               key={project.id}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              itemProp="itemListElement"
+              itemScope
+              itemType="https://schema.org/CreativeWork"
               initial={{
                 opacity: 0,
                 y: 60,
@@ -130,8 +144,14 @@ const PortfolioSection = () => {
                 y: -8,
                 transition: { duration: 0.3 }
               }}
-              className="relative group block no-underline text-foreground hover:text-foreground" // Ważne style
+              className="relative group block no-underline text-foreground hover:text-foreground"
             >
+              {/* Schema.org markup */}
+              <meta itemProp="name" content={project.title} />
+              <meta itemProp="description" content={project.description} />
+              <meta itemProp="keywords" content={project.seoKeywords.join(", ")} />
+              <meta itemProp="location" content="Warszawa, Polska" />
+              
               {/* Card */}
               <div className="relative h-full rounded-3xl overflow-hidden border border-border bg-background/50 backdrop-blur-sm shadow-lg shadow-black/5 group-hover:shadow-xl group-hover:shadow-primary/10 transition-all duration-500">
                 {/* Browser Top Bar */}
@@ -155,14 +175,16 @@ const PortfolioSection = () => {
                   <div className="relative w-full h-full">
                     <img
                       src={project.image}
-                      alt={project.title}
+                      alt={`Strona internetowa ${project.title} - realizacja WebBoss Warszawa`}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      itemProp="image"
+                      loading="lazy"
                     />
                     
                     {/* Gradient Overlay */}
                     <div className={`absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                     
-                    {/* Hover Overlay - USUŃ link z tego miejsca */}
+                    {/* Hover Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-end p-6">
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -174,6 +196,7 @@ const PortfolioSection = () => {
                             <span 
                               key={idx} 
                               className="px-3 py-1 text-xs font-medium rounded-full bg-background/80 text-foreground border border-border"
+                              itemProp="featureList"
                             >
                               {feature}
                             </span>
@@ -184,12 +207,19 @@ const PortfolioSection = () => {
                         </p>
                       </motion.div>
                       
-                      {/* ZMIEŃ ten link na div z przyciskiem */}
-                      <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-lg">
+                      {/* Link */}
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-semibold shadow-lg hover:shadow-xl transition-all"
+                        aria-label={`Zobacz stronę ${project.title} na żywo`}
+                        itemProp="url"
+                      >
                         <Eye className="w-4 h-4" />
                         Zobacz na żywo
                         <ExternalLink className="w-4 h-4" />
-                      </div>
+                      </a>
                     </div>
                   </div>
                   
@@ -208,25 +238,35 @@ const PortfolioSection = () => {
                   </div>
                   
                   {/* Title */}
-                  <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-xl lg:text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300" itemProp="headline">
                     {project.title}
                   </h3>
                   
-                  {/* URL Link - ZMIEŃ na div */}
+                  {/* URL Link */}
                   <div className="flex items-center justify-between">
                     <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-                      <span className="truncate max-w-[200px]">
+                      <a 
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="truncate max-w-[200px] hover:text-primary transition-colors"
+                        itemProp="sameAs"
+                      >
                         {project.url.replace("https://", "")}
-                      </span>
+                      </a>
                       <ArrowRight className="w-3 h-3" />
                     </div>
                     
-                    <motion.div
+                    <motion.a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
                       whileHover={{ rotate: 90 }}
                       transition={{ duration: 0.3 }}
+                      aria-label={`Otwórz stronę ${project.title}`}
                     >
                       <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                    </motion.div>
+                    </motion.a>
                   </div>
                 </div>
 
@@ -236,7 +276,7 @@ const PortfolioSection = () => {
                 </div>
               </div>
 
-              {/* Floating Elements - pozostają bez zmian */}
+              {/* Floating Elements */}
               <motion.div
                 animate={{ 
                   y: [0, -10, 0],
@@ -248,6 +288,7 @@ const PortfolioSection = () => {
                   delay: index * 0.5
                 }}
                 className={`absolute -top-3 -right-3 w-6 h-6 rounded-full bg-gradient-to-r ${project.gradient} opacity-20 group-hover:opacity-40 transition-opacity duration-500`}
+                aria-hidden="true"
               />
               
               <motion.div
@@ -261,9 +302,29 @@ const PortfolioSection = () => {
                   delay: index * 0.7
                 }}
                 className={`absolute -bottom-3 -left-3 w-8 h-8 rounded-full bg-gradient-to-r ${project.gradient} opacity-15 group-hover:opacity-30 transition-opacity duration-500`}
+                aria-hidden="true"
               />
-            </motion.a>
+            </motion.div>
           ))}
+        </div>
+
+        {/* Hidden SEO Content */}
+        <div className="mt-12 sr-only">
+          <h3>Portfolio stron internetowych WebBoss Warszawa</h3>
+          <p>
+            Prezentujemy nasze najlepsze realizacje stron internetowych dla firm z Warszawy. 
+            Specjalizujemy się w tworzeniu profesjonalnych stron WWW dla różnych branż w Warszawie:
+          </p>
+          <ul>
+            <li>Strony internetowe dla kancelarii prawnych Warszawa</li>
+            <li>Strony WWW dla firm remontowych i budowlanych Warszawa</li>
+            <li>Projektowanie stron dla usługodawców Warszawa</li>
+            <li>Nowoczesne strony dla przedsiębiorców z Warszawy</li>
+          </ul>
+          <p>
+            Każda strona internetowa w naszym portfolio jest w pełni responsywna, zoptymalizowana pod SEO 
+            i dostosowana do potrzeb konkretnej branży w Warszawie.
+          </p>
         </div>
 
         {/* CTA */}
@@ -275,19 +336,27 @@ const PortfolioSection = () => {
         >
           <div className="inline-block px-6 py-3 rounded-full border border-border bg-secondary/30 mb-6">
             <p className="text-muted-foreground">
-              Każdy projekt to unikalne rozwiązanie
+              Każdy projekt to unikalne rozwiązanie dostosowane do branży
             </p>
           </div>
           <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-6">
-            Chcesz taką stronę dla swojej firmy?
+            Chcesz taką profesjonalną stronę dla swojej firmy w Warszawie?
           </h3>
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Stworzymy dla Ciebie nowoczesną, funkcjonalną stronę internetową, która przyciągnie klientów 
+            i zwiększy sprzedaż Twojej firmy w Warszawie.
+          </p>
           <a
             href="#kontakt"
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-primary-glow text-primary-foreground font-semibold text-lg hover:shadow-xl hover:shadow-primary/20 transition-all duration-300 group"
+            aria-label="Umów bezpłatną konsultację strony internetowej Warszawa"
           >
-            <span>Umów bezpłatną konsultację</span>
+            <span>Umów bezpłatną konsultację strony WWW</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
+          <p className="text-sm text-muted-foreground mt-6">
+            Specjalizujemy się w tworzeniu stron internetowych dla firm z Warszawy i okolic
+          </p>
         </motion.div>
       </div>
     </section>

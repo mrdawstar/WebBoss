@@ -12,7 +12,9 @@ import {
   FileText,
   Users,
   Target,
-  Sparkles
+  Sparkles,
+  ArrowRight,
+  ChevronRight
 } from "lucide-react";
 
 const ProcessSection = () => {
@@ -23,81 +25,100 @@ const ProcessSection = () => {
     {
       icon: MessageSquare,
       title: "Konsultacja & Analiza",
-      description: "Dokładnie poznajemy Twój biznes i cele",
+      description: "Dokładne poznanie potrzeb i celów projektu strony internetowej",
       details: [
         "Bezpłatna konsultacja online/telefoniczna",
-        "Analiza potrzeb i konkurencji",
-        "Określenie celów i grupy docelowej",
+        "Analiza potrzeb biznesowych i konkurencji",
+        "Określenie celów i grupy docelowej strony",
         "Wstępne rekomendacje technologiczne"
       ],
       duration: "1-2 dni",
       number: "01",
       color: "text-blue-500",
-      bgColor: "bg-blue-500/10"
+      bgColor: "bg-blue-500/10",
+      seoKeywords: ["konsultacja strony internetowej", "analiza potrzeb", "planowanie projektu"]
     },
     {
       icon: Calculator,
       title: "Planowanie & Wycena",
-      description: "Przygotowujemy szczegółową strategię",
+      description: "Przygotowanie szczegółowej strategii tworzenia strony",
       details: [
-        "Szczegółowa wycena w 24h",
-        "Plan projektu z harmonogramem",
-        "Propozycja technologii i rozwiązań",
-        "Zatwierdzenie zakresu prac"
+        "Szczegółowa wycena tworzenia strony w 24h",
+        "Plan projektu z harmonogramem prac",
+        "Propozycja technologii i rozwiązań dla strony",
+        "Zatwierdzenie zakresu prac nad stroną"
       ],
       duration: "1 dzień",
       number: "02",
       color: "text-purple-500",
-      bgColor: "bg-purple-500/10"
+      bgColor: "bg-purple-500/10",
+      seoKeywords: ["wycena strony internetowej", "planowanie strony", "harmonogram prac"]
     },
     {
       icon: Code,
       title: "Realizacja & Design",
-      description: "Tworzymy i testujemy rozwiązanie",
+      description: "Tworzenie i testowanie funkcjonalnej strony internetowej",
       details: [
-        "Projektowanie UI/UX i prototypowanie",
+        "Projektowanie UI/UX i prototypowanie strony",
         "Programowanie z code reviews",
-        "Regularne aktualizacje postępu",
-        "Testy na różnych urządzeniach"
+        "Regularne aktualizacje postępu prac",
+        "Testy responsywności na różnych urządzeniach"
       ],
       duration: "2-4 tygodnie",
       number: "03",
       color: "text-green-500",
-      bgColor: "bg-green-500/10"
+      bgColor: "bg-green-500/10",
+      seoKeywords: ["realizacja strony internetowej", "programowanie strony", "testowanie strony"]
     },
     {
       icon: Rocket,
       title: "Wdrożenie & Wsparcie",
-      description: "Uruchamiamy i dbamy o Twój sukces",
+      description: "Uruchomienie strony i zapewnienie ciągłego wsparcia",
       details: [
-        "Wdrożenie na serwer i optymalizacja",
-        "Szkolenie z obsługi panelu",
-        "30 dni bezpłatnego wsparcia",
-        "Monitorowanie wydajności"
+        "Wdrożenie strony na serwer i optymalizacja",
+        "Szkolenie z obsługi panelu administracyjnego",
+        "30 dni bezpłatnego wsparcia po wdrożeniu",
+        "Monitorowanie wydajności strony"
       ],
       duration: "3-5 dni",
       number: "04",
       color: "text-orange-500",
-      bgColor: "bg-orange-500/10"
+      bgColor: "bg-orange-500/10",
+      seoKeywords: ["wdrożenie strony internetowej", "wsparcie techniczne", "optymalizacja strony"]
     },
   ];
 
   const benefits = [
     { icon: Shield, text: "Gwarancja satysfakcji" },
-    { icon: Clock, text: "Terminowość" },
+    { icon: Clock, text: "Terminowość realizacji" },
     { icon: Zap, text: "Szybkość działania" },
     { icon: CheckCircle, text: "Jakość potwierdzona" },
   ];
 
   return (
-    <section className="section-padding relative z-10" ref={ref} id="proces">
+    <section 
+      className="section-padding relative z-10" 
+      ref={ref} 
+      id="proces"
+      itemScope 
+      itemType="https://schema.org/WebPage"
+    >
       <div className="container-custom">
+        {/* Schema.org for Process */}
+        <div className="sr-only">
+          <meta itemProp="name" content="Proces tworzenia stron internetowych WebBoss" />
+          <meta itemProp="description" content="Przejrzysty proces współpracy przy tworzeniu profesjonalnych stron internetowych" />
+          <meta itemProp="keywords" content="proces tworzenia strony, etapy tworzenia strony, współpraca przy stronie internetowej" />
+        </div>
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16"
+          itemScope
+          itemType="https://schema.org/HowTo"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 mb-4">
             <Target size={14} className="text-primary" />
@@ -105,11 +126,12 @@ const ProcessSection = () => {
           </div>
           
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-            Jak wygląda <span className="text-gradient-primary">nasza współpraca</span>?
+            Jak wygląda proces tworzenia <span className="text-gradient-primary">strony internetowej</span>?
           </h2>
           
-          <p className="text-xl text-muted-foreground mb-8">
-            Przejrzysty proces od pomysłu do realizacji. Wiesz na czym stoisz w każdej chwili.
+          <p className="text-xl text-muted-foreground mb-8" itemProp="description">
+            Przejrzysty proces współpracy od pomysłu do gotowej strony internetowej. 
+            Wiesz na czym stoisz w każdej chwili realizacji projektu.
           </p>
 
           {/* Benefits */}
@@ -120,13 +142,16 @@ const ProcessSection = () => {
             className="flex flex-wrap justify-center gap-4 mb-8"
           >
             {benefits.map((benefit, index) => (
-              <div 
+              <motion.div 
                 key={index}
-                className="glass-card flex items-center gap-2 px-4 py-2 rounded-full hover:scale-105 transition-all duration-300"
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ duration: 0.3 }}
+                className="glass-card flex items-center gap-2 px-4 py-2 rounded-full hover:border-primary/30 transition-all duration-300"
+                aria-label={benefit.text}
               >
                 <benefit.icon size={16} className="text-primary" />
                 <span className="text-sm font-medium text-foreground">{benefit.text}</span>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </motion.div>
@@ -151,7 +176,13 @@ const ProcessSection = () => {
                     animate={stepInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                     transition={{ duration: 0.6, delay: 0.1 }}
                     className="relative"
+                    itemScope
+                    itemType="https://schema.org/HowToStep"
                   >
+                    <meta itemProp="position" content={String(index + 1)} />
+                    <meta itemProp="name" content={step.title} />
+                    <meta itemProp="description" content={step.description} />
+                    <meta itemProp="keywords" content={step.seoKeywords.join(", ")} />
 
                     {/* Content wrapper */}
                     <div className={`flex ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-start`}>
@@ -161,8 +192,11 @@ const ProcessSection = () => {
                       {/* Card */}
                       <motion.div
                         whileHover={{ scale: 1.02, y: -5 }}
+                        transition={{ duration: 0.3 }}
                         className="w-full lg:w-1/2 relative"
                         style={{ zIndex: 10 }}
+                        role="article"
+                        aria-label={`Etap ${index + 1}: ${step.title}`}
                       >
                         <div className="glass-card p-6 lg:p-8 rounded-3xl hover:border-primary/30 transition-all duration-500 shadow-lg hover:shadow-2xl hover:shadow-primary/20">
                           {/* Step number and title */}
@@ -170,8 +204,9 @@ const ProcessSection = () => {
                             <motion.div
                               initial={{ scale: 0, rotate: -180 }}
                               animate={isInView ? { scale: 1, rotate: 0 } : {}}
-                              transition={{ duration: 0.5, delay: index * 0.2 + 0.1 }}
+                              transition={{ duration: 0.5, delay: index * 0.2 + 0.1, type: "spring", stiffness: 200 }}
                               className={`w-16 h-16 rounded-2xl ${step.bgColor} flex items-center justify-center flex-shrink-0`}
+                              aria-hidden="true"
                             >
                               <step.icon className={`w-8 h-8 ${step.color}`} />
                             </motion.div>
@@ -185,7 +220,7 @@ const ProcessSection = () => {
                               >
                                 {step.number}
                               </motion.div>
-                              <h3 className="text-2xl font-bold text-foreground">{step.title}</h3>
+                              <h3 className="text-2xl font-bold text-foreground" itemProp="name">{step.title}</h3>
                             </div>
                           </div>
 
@@ -195,6 +230,7 @@ const ProcessSection = () => {
                             animate={isInView ? { opacity: 1 } : {}}
                             transition={{ delay: index * 0.2 + 0.2 }}
                             className="text-lg text-foreground/80 mb-6"
+                            itemProp="description"
                           >
                             {step.description}
                           </motion.p>
@@ -210,7 +246,7 @@ const ProcessSection = () => {
                                 className="flex items-start gap-3"
                               >
                                 <CheckCircle size={16} className="text-primary mt-1 flex-shrink-0" />
-                                <span className="text-foreground/70">{detail}</span>
+                                <span className="text-foreground/70" itemProp="tool">{detail}</span>
                               </motion.div>
                             ))}
                           </div>
@@ -227,62 +263,182 @@ const ProcessSection = () => {
           </div>
         </div>
 
+        {/* Hidden SEO Content */}
+        <div className="mt-12 sr-only">
+          <h3>Proces tworzenia strony internetowej krok po kroku</h3>
+          <p>
+            Nasz proces współpracy przy tworzeniu stron internetowych jest przejrzysty i efektywny. 
+            Dzielimy go na 4 główne etapy: konsultacja i analiza, planowanie i wycena, realizacja i design, 
+            oraz wdrożenie i wsparcie. Dzięki temu klient ma pełną kontrolę nad postępem prac i wie czego może 
+            się spodziewać na każdym etapie tworzenia strony.
+          </p>
+        </div>
+
         {/* Final CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
+          transition={{ 
+            delay: 1,
+            duration: 0.8,
+            type: "spring",
+            stiffness: 100
+          }}
           className="text-center mt-16 lg:mt-20"
         >
-          <div className="glass-card max-w-2xl mx-auto p-8 rounded-3xl">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center mx-auto mb-6">
-              <Users className="text-white" size={28} />
-            </div>
-            
-            <h3 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
-              Gotowy na współpracę?
-            </h3>
-            
-            <p className="text-lg text-muted-foreground mb-6">
-              Omówmy Twój projekt i ustalmy szczegóły. Bez zobowiązań, za to z konkretną wiedzą.
-            </p>
+          <div className="relative overflow-hidden glass-card max-w-2xl mx-auto p-8 rounded-3xl">
+            {/* Background gradient animation */}
+            <motion.div
+              initial={{ scale: 0, opacity: 0 }}
+              animate={isInView ? { scale: 1, opacity: 0.1 } : {}}
+              transition={{ delay: 1.2, duration: 1 }}
+              className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20"
+              style={{ borderRadius: 'inherit' }}
+            />
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="#kontakt"
-                className="inline-flex items-center justify-center gap-3 px-8 py-3 rounded-2xl bg-gradient-to-r from-primary to-accent text-white font-semibold hover:shadow-xl hover:shadow-primary/30 hover:scale-105 active:scale-95 transition-all duration-300"
+            {/* Floating sparkles */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 1.4 }}
+              className="absolute top-4 right-4"
+              aria-hidden="true"
+            >
+              <Sparkles className="text-primary/40" size={24} />
+            </motion.div>
+
+            <div className="relative z-10">
+              {/* Animated icon */}
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={isInView ? { scale: 1, rotate: 0 } : {}}
+                transition={{ 
+                  delay: 1.1,
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 10
+                }}
+                whileHover={{ rotate: 360, scale: 1.1 }}
+                className="w-20 h-20 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center mx-auto mb-6 shadow-xl shadow-primary/30"
+                aria-hidden="true"
               >
-                <MessageSquare size={20} />
-                Umów bezpłatną konsultację
-              </a>
+                <Users className="text-white" size={32} />
+              </motion.div>
               
-              <a
-                href="#portfolio"
-                className="glass-card inline-flex items-center justify-center gap-3 px-8 py-3 rounded-2xl font-semibold hover:scale-105 active:scale-95 transition-all duration-300"
+              <motion.h3
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 1.2 }}
+                className="text-2xl lg:text-3xl font-bold text-foreground mb-4"
               >
-                <FileText size={20} />
-                Zobacz przykładowe projekty
-              </a>
-            </div>
+                Rozpocznij proces tworzenia swojej strony
+              </motion.h3>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 1.3 }}
+                className="text-lg text-muted-foreground mb-8"
+              >
+                Omówmy Twój projekt strony internetowej i ustalmy szczegóły współpracy. 
+                Bez zobowiązań, za to z konkretną wiedzą o procesie tworzenia.
+              </motion.p>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-white/10">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary mb-1">24h</div>
-                <div className="text-sm text-muted-foreground">Szybka wycena</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary mb-1">100%</div>
-                <div className="text-sm text-muted-foreground">Satysfakcji klientów</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary mb-1">30 dni</div>
-                <div className="text-sm text-muted-foreground">Bezpłatne wsparcie</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary mb-1">0 zł</div>
-                <div className="text-sm text-muted-foreground">Za konsultację</div>
-              </div>
+              {/* Animated buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 1.4 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
+              >
+                <motion.a
+                  href="#kontakt"
+                  whileHover={{ 
+                    scale: 1.05, 
+                    boxShadow: "0 10px 30px rgba(99, 102, 241, 0.3)",
+                    y: -3 
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={isInView ? { x: 0, opacity: 1 } : {}}
+                  transition={{ delay: 1.5 }}
+                  className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-primary to-accent text-white font-semibold overflow-hidden"
+                  aria-label="Umów bezpłatną konsultację tworzenia strony internetowej"
+                >
+                  {/* Animated gradient background */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-accent to-primary"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "0%" }}
+                    transition={{ duration: 0.4 }}
+                  />
+                  
+                  {/* Animated arrow */}
+                  <motion.div
+                    initial={{ x: -5 }}
+                    whileHover={{ x: 5 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center gap-2 relative z-10"
+                  >
+                    <MessageSquare size={20} />
+                    <span>Umów bezpłatną konsultację strony</span>
+                    <ArrowRight className="group-hover:translate-x-1 transition-transform duration-200" size={18} />
+                  </motion.div>
+                </motion.a>
+                
+                <motion.a
+                  href="#portfolio"
+                  whileHover={{ 
+                    scale: 1.05, 
+                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.1)",
+                    y: -3 
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={isInView ? { x: 0, opacity: 1 } : {}}
+                  transition={{ delay: 1.6 }}
+                  className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl glass-card font-semibold overflow-hidden"
+                  aria-label="Zobacz przykładowe projekty stron internetowych"
+                >
+                  {/* Hover effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Content */}
+                  <div className="flex items-center gap-2 relative z-10">
+                    <FileText size={20} />
+                    <span>Zobacz realizacje stron internetowych</span>
+                    <ChevronRight className="group-hover:translate-x-1 transition-transform duration-200" size={18} />
+                  </div>
+                </motion.a>
+              </motion.div>
+
+              {/* Stats with animation */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 1.7 }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-10 border-t border-white/10"
+              >
+                {[
+                  { value: "24h", label: "Szybka wycena strony" },
+                  { value: "100%", label: "Satysfakcji klientów" },
+                  { value: "30 dni", label: "Bezpłatne wsparcie" },
+                  { value: "0 zł", label: "Za konsultację" },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{ delay: 1.8 + index * 0.1 }}
+                    whileHover={{ y: -5 }}
+                    className="text-center p-4 rounded-2xl hover:bg-white/5 transition-all duration-300"
+                    aria-label={`${stat.value} ${stat.label}`}
+                  >
+                    <div className="text-2xl font-bold text-gradient-primary mb-1">{stat.value}</div>
+                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           </div>
         </motion.div>

@@ -5,27 +5,31 @@ import { User, TrendingUp, Palette, Zap } from "lucide-react";
 const features = [
   {
     icon: User,
-    title: "Indywidualne podejście",
+    title: "Indywidualne podejście dla firm w Warszawie",
     description:
-      "Każdy projekt traktujemy wyjątkowo, dostosowując rozwiązania do Twoich potrzeb.",
+      "Każdy projekt traktujemy wyjątkowo, dostosowując rozwiązania do potrzeb Twojej firmy w Warszawie. Personalizowane strony WWW.",
+    keywords: ["indywidualne projektowanie Warszawa", "personalizacja stron", "dostosowanie do firmy Warszawa"]
   },
   {
     icon: TrendingUp,
-    title: "Więcej klientów",
+    title: "Optymalizacja SEO i konwersji",
     description:
-      "SEO + optymalizacja konwersji = więcej zapytań i klientów dla Twojej firmy.",
+      "SEO + optymalizacja konwersji = więcej zapytań i klientów dla Twojej firmy. Pozycjonowanie stron Warszawa.",
+    keywords: ["SEO Warszawa", "optymalizacja konwersji", "pozycjonowanie stron WWW", "więcej klientów Warszawa"]
   },
   {
     icon: Palette,
-    title: "Premium design",
+    title: "Nowoczesny design premium",
     description:
-      "Nowoczesne, estetyczne projekty, które wyróżniają się na tle konkurencji.",
+      "Nowoczesne, estetyczne projekty, które wyróżniają się na tle konkurencji. Responsywne strony internetowe Warszawa.",
+    keywords: ["nowoczesny design Warszawa", "premium design stron", "estetyczne strony WWW", "design responsywny"]
   },
   {
     icon: Zap,
-    title: "Szybkość & wydajność",
+    title: "Szybkość ładowania i wydajność",
     description:
-      "Strony zoptymalizowane pod kątem szybkości ładowania i wydajności.",
+      "Strony zoptymalizowane pod kątem szybkości ładowania i wydajności. Szybkie strony WWW dla firm w Warszawie.",
+    keywords: ["szybkość strony Warszawa", "optymalizacja wydajności", "Google PageSpeed", "szybkie ładowanie stron"]
   },
 ];
 
@@ -34,7 +38,13 @@ const WhyUsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="o-nas" className="section-padding relative z-10" ref={ref}>
+    <section 
+      id="o-nas" 
+      className="section-padding relative z-10" 
+      ref={ref}
+      itemScope
+      itemType="https://schema.org/WebPageElement"
+    >
       <div className="container-custom">
         {/* Header */}
         <motion.div
@@ -52,16 +62,20 @@ const WhyUsSection = () => {
             Dlaczego my
           </motion.span>
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-            Dlaczego <span className="text-gradient-primary">WebBoss</span>?
+            Dlaczego warto wybrać <span className="text-gradient-primary">WebBoss</span> w <span className="text-gradient-primary">Warszawie</span>?
           </h2>
-          <p className="text-xl text-muted-foreground">
-            Tworzymy strony internetowe, które wyróżniają się użytecznością i
-            skutecznością.
+          <p className="text-xl text-muted-foreground" itemProp="description">
+            Jako doświadczeni specjaliści od stron internetowych w Warszawie, tworzymy strony WWW, które 
+            wyróżniają się użytecznością, skutecznością i przynoszą realne efekty dla firm z Warszawy.
           </p>
         </motion.div>
 
         {/* Features Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div 
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+          itemScope
+          itemType="https://schema.org/ItemList"
+        >
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -73,27 +87,67 @@ const WhyUsSection = () => {
                 ease: [0.22, 1, 0.36, 1],
               }}
               className="group"
+              itemProp="itemListElement"
+              itemScope
+              itemType="https://schema.org/Service"
             >
-              <div className="glass-card-hover rounded-3xl p-8 h-full card-glow">
+              <div 
+                className="glass-card-hover rounded-3xl p-8 h-full card-glow"
+                role="article"
+                aria-label={`${feature.title} - WebBoss Warszawa`}
+              >
                 {/* Icon */}
                 <motion.div
                   className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500"
                   whileHover={{ rotate: [0, -10, 10, 0] }}
                   transition={{ duration: 0.5 }}
+                  aria-hidden="true"
                 >
                   <feature.icon className="w-8 h-8 text-primary" />
                 </motion.div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300" itemProp="name">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <meta itemProp="serviceType" content="Tworzenie stron internetowych" />
+                <meta itemProp="areaServed" content="Warszawa, Mazowieckie" />
+                <p className="text-muted-foreground leading-relaxed" itemProp="description">
                   {feature.description}
                 </p>
+                <div className="mt-3">
+                  <meta itemProp="keywords" content={feature.keywords.join(", ")} />
+                </div>
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Additional SEO Content - Hidden visually but accessible to search engines */}
+        <div className="mt-16 text-center">
+          <div className="sr-only" aria-hidden="true">
+            <h3>WebBoss - profesjonalne strony internetowe Warszawa</h3>
+            <p>
+              WebBoss to zespół specjalistów od stron internetowych w Warszawie. 
+              Oferujemy kompleksowe tworzenie stron WWW dla firm z Warszawy i okolic. 
+              Nasze strony internetowe w Warszawie wyróżniają się wysoką jakością wykonania, 
+              optymalizacją SEO oraz nowoczesnym designem. Działamy na rynku Warszawy, 
+              pomagając firmom w budowaniu silnej obecności online.
+            </p>
+            <ul>
+              <li>Strony internetowe dla małych firm Warszawa</li>
+              <li>Strony WWW dla średnich przedsiębiorstw Warszawa</li>
+              <li>Projektowanie stron internetowych dla startupów Warszawa</li>
+              <li>Modernizacja istniejących stron Warszawa</li>
+              <li>Optymalizacja SEO stron Warszawa</li>
+              <li>Responsywne projektowanie Warszawa</li>
+            </ul>
+          </div>
+          
+          <p className="text-lg text-muted-foreground mt-8">
+            Wybierając <strong>WebBoss Warszawa</strong>, wybierasz profesjonalne podejście do 
+            tworzenia stron internetowych i realne efekty dla Twojej firmy.
+          </p>
         </div>
       </div>
     </section>

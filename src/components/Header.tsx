@@ -56,6 +56,10 @@ const Header = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -162,7 +166,7 @@ const Header = () => {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={closeMobileMenu}
                       className="text-base font-medium text-foreground hover:text-primary transition-colors py-3 px-4 rounded-xl hover:bg-primary/5 block"
                     >
                       {link.name}
@@ -170,11 +174,12 @@ const Header = () => {
                   ))}
                 </div>
 
-                {/* Kontakt w menu mobilnym - nad przyciskiem */}
+                {/* Kontakt w menu mobilnym */}
                 <div className="mt-4 mb-4 pt-4 border-t border-border/50">
                   <div className="flex flex-col gap-3">
                     <a
                       href={`mailto:${contactInfo.email}`}
+                      onClick={closeMobileMenu}
                       className="flex items-center gap-3 text-foreground hover:text-primary transition-colors py-2 group"
                     >
                       <Mail size={18} className="group-hover:scale-110 transition-transform" />
@@ -182,6 +187,7 @@ const Header = () => {
                     </a>
                     <a
                       href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
+                      onClick={closeMobileMenu}
                       className="flex items-center gap-3 text-foreground hover:text-primary transition-colors py-2 group"
                     >
                       <Phone size={18} className="group-hover:scale-110 transition-transform" />
@@ -190,17 +196,21 @@ const Header = () => {
                   </div>
                 </div>
 
-                {/* CTA Button w menu mobilnym - NA SAMYM DOLE */}
-                <motion.a
-                  href="#kontakt"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navLinks.length * 0.05 }}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="px-6 py-3 rounded-xl font-semibold text-white text-center bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] transition-all duration-300"
+                {/* CTA Button w menu mobilnym - JEDEN przycisk */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="mt-2"
                 >
-                  Bezpłatna wycena
-                </motion.a>
+                  <a
+                    href="#kontakt"
+                    onClick={closeMobileMenu}
+                    className="block px-6 py-3 rounded-xl font-semibold text-white text-center bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] hover:from-[#4f46e5] hover:to-[#7c3aed] transition-all duration-300"
+                  >
+                    Bezpłatna wycena
+                  </a>
+                </motion.div>
               </motion.div>
             </motion.div>
           )}
