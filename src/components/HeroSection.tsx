@@ -81,6 +81,40 @@ const fadeSlow: Variants = {
   },
 };
 
+// Variants for button animations
+const buttonVariants: Record<string, any> = {
+  primaryHover: {
+    scale: 1.05,
+    boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.5), 0 0 15px rgba(59, 130, 246, 0.3)",
+    transition: {
+      duration: 0.2,
+      ease: "easeOut"
+    }
+  },
+  primaryTap: {
+    scale: 0.98,
+    transition: {
+      duration: 0.1
+    }
+  },
+  secondaryHover: {
+    scale: 1.05,
+    backgroundColor: "rgba(243, 244, 246, 0.8)",
+    borderColor: "rgb(209, 213, 219)",
+    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
+    transition: {
+      duration: 0.2,
+      ease: "easeOut"
+    }
+  },
+  secondaryTap: {
+    scale: 0.98,
+    transition: {
+      duration: 0.1
+    }
+  }
+};
+
 // Duża animacja Lottie po prawej stronie
 const LargeAnimatedLottie = () => {
   const [animationData, setAnimationData] = useState(null);
@@ -143,8 +177,7 @@ const HeroSection = () => {
   return (
     <>
       <HelmetSEO />
-      
-      <section className="relative overflow-hidden bg-background" itemScope itemType="https://schema.org/WebPage">
+
         {/* subtle background glow */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-[-25%] left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-primary/10 blur-[120px] rounded-full" />
@@ -184,7 +217,7 @@ const HeroSection = () => {
                 <br />
                 <span className="text-primary">nowoczesnej strony</span>
                 <br />
-                internetowej w <span itemProp="location">Warszawie</span>?
+                internetowej w <span itemProp="location">Warszawa</span>?
               </motion.h1>
 
               <motion.p
@@ -201,21 +234,43 @@ const HeroSection = () => {
                 variants={fadeSlow}
                 className="flex flex-wrap gap-6"
               >
-                <a
+                {/* Primary Button - Enhanced with whileHover and whileTap animations */}
+                <motion.a
                   href="#kontakt"
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-4 rounded-lg transition-colors"
+                  className="relative inline-flex items-center gap-2 bg-primary text-primary-foreground text-lg px-8 py-4 rounded-lg overflow-hidden group"
                   aria-label="Zamów stronę internetową w Warszawie"
+                  whileHover="primaryHover"
+                  whileTap="primaryTap"
+                  variants={buttonVariants}
                 >
-                  Zamów stronę WWW
-                  <ArrowRight size={20} />
-                </a>
-                <a
+                  {/* Animated background shine effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  
+                  {/* Button content */}
+                  <span className="relative">Zamów stronę WWW</span>
+                  <motion.span
+                    whileHover={{ x: 3 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ArrowRight size={20} />
+                  </motion.span>
+                </motion.a>
+
+                {/* Secondary Button - Enhanced with whileHover and whileTap animations */}
+                <motion.a
                   href="#portfolio"
-                  className="inline-flex items-center gap-2 border border-border text-lg px-8 py-4 rounded-lg hover:bg-secondary transition-colors"
+                  className="inline-flex items-center gap-2 border border-border text-lg px-8 py-4 rounded-lg group relative overflow-hidden"
                   aria-label="Zobacz portfolio stron internetowych Warszawa"
+                  whileHover="secondaryHover"
+                  whileTap="secondaryTap"
+                  variants={buttonVariants}
                 >
-                  Zobacz realizacje z Warszawy
-                </a>
+                  {/* Subtle background effect on hover */}
+                  <span className="absolute inset-0 bg-gradient-to-br from-gray-50/0 via-gray-100/0 to-gray-50/0 group-hover:from-gray-50/10 group-hover:via-gray-100/20 group-hover:to-gray-50/10 transition-all duration-300" />
+                  
+                  {/* Button content */}
+                  <span className="relative">Zobacz realizacje z Warszawy</span>
+                </motion.a>
               </motion.div>
             </motion.div>
 
@@ -274,7 +329,7 @@ const HeroSection = () => {
                   <br />
                   <span className="text-primary">nowoczesnej strony</span>
                   <br />
-                  internetowej w <span itemProp="location">Warszawie</span>?
+                  internetowej w <span itemProp="location">Warszawa</span>?
                 </motion.h1>
 
                 <motion.p
@@ -291,27 +346,46 @@ const HeroSection = () => {
                   variants={fadeSlow}
                   className="flex flex-wrap gap-6"
                 >
-                  <a
+                  {/* Primary Button for Mobile */}
+                  <motion.a
                     href="#kontakt"
-                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-4 rounded-lg transition-colors"
+                    className="relative inline-flex items-center gap-2 bg-primary text-primary-foreground text-lg px-8 py-4 rounded-lg overflow-hidden group"
                     aria-label="Zamów stronę internetową w Warszawie"
+                    whileHover="primaryHover"
+                    whileTap="primaryTap"
+                    variants={buttonVariants}
                   >
-                    Zamów stronę WWW
-                    <ArrowRight size={20} />
-                  </a>
-                  <a
+                    {/* Animated background shine effect */}
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                    
+                    <span className="relative">Zamów stronę WWW</span>
+                    <motion.span
+                      whileHover={{ x: 3 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ArrowRight size={20} />
+                    </motion.span>
+                  </motion.a>
+
+                  {/* Secondary Button for Mobile */}
+                  <motion.a
                     href="#portfolio"
-                    className="inline-flex items-center gap-2 border border-border text-lg px-8 py-4 rounded-lg hover:bg-secondary transition-colors"
+                    className="inline-flex items-center gap-2 border border-border text-lg px-8 py-4 rounded-lg group relative overflow-hidden"
                     aria-label="Zobacz portfolio stron internetowych Warszawa"
+                    whileHover="secondaryHover"
+                    whileTap="secondaryTap"
+                    variants={buttonVariants}
                   >
-                    Zobacz realizacje z Warszawy
-                  </a>
+                    {/* Subtle background effect on hover */}
+                    <span className="absolute inset-0 bg-gradient-to-br from-gray-50/0 via-gray-100/0 to-gray-50/0 group-hover:from-gray-50/10 group-hover:via-gray-100/20 group-hover:to-gray-50/10 transition-all duration-300" />
+                    
+                    <span className="relative">Zobacz realizacje z Warszawy</span>
+                  </motion.a>
                 </motion.div>
               </motion.div>
             </div>
           </div>
         </div>
-      </section>
     </>
   );
 };

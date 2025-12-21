@@ -8,141 +8,189 @@ import {
   Store,
   Briefcase,
   ArrowRight,
+  ExternalLink,
+  Sparkles,
 } from "lucide-react";
 
 const targets = [
   {
     icon: Building2,
-    title: "Firmy w Warszawie bez strony internetowej",
-    description: "Zbuduj profesjonalną obecność online od podstaw. Strony WWW dla firm w Warszawie.",
-    keywords: ["nowa strona internetowa Warszawa", "firma bez strony WWW Warszawa", "pierwsza strona firmy Warszawa"]
+    title: "Firmy bez strony WWW",
+    description: "Nowa strona od podstaw w Warszawie",
+    accent: "Stwórz obecność online",
   },
   {
     icon: RefreshCw,
-    title: "Modernizacja starych stron WWW",
-    description: "Odśwież wizerunek i zwiększ konwersję. Redesign stron internetowych Warszawa.",
-    keywords: ["modernizacja strony Warszawa", "redesign strony WWW Warszawa", "odświeżenie strony internetowej"]
+    title: "Modernizacja stron",
+    description: "Redesign starych, nieaktualnych witryn",
+    accent: "Odśwież wizerunek",
   },
   {
     icon: Scissors,
-    title: "Barberzy i salony beauty w Warszawie",
-    description: "Przyciągnij klientów stylowym designem. Strony dla salonów kosmetycznych Warszawa.",
-    keywords: ["strona dla barbera Warszawa", "salon beauty strona internetowa", "fryzjer Warszawa strona WWW"]
+    title: "Barberzy & Beauty",
+    description: "Salony kosmetyczne i fryzjerskie",
+    accent: "Przyciągnij klientów",
   },
   {
     icon: Car,
-    title: "Detailerzy i branża motoryzacyjna",
-    description: "Pokaż swoje realizacje w najlepszym świetle. Strony dla warsztatów Warszawa.",
-    keywords: ["strona detailera Warszawa", "warsztat samochodowy strona WWW", "branża motoryzacyjna Warszawa"]
+    title: "Branża motoryzacyjna",
+    description: "Detailerzy, warsztaty, salony",
+    accent: "Pokaż realizacje",
   },
   {
     icon: Store,
-    title: "Sklepy i lokale usługowe Warszawa",
-    description: "Zwiększ widoczność lokalnego biznesu. Strony dla sklepów internetowych.",
-    keywords: ["sklep internetowy Warszawa", "lokal usługowy strona WWW", "biznes lokalny Warszawa"]
+    title: "Sklepy & Usługi",
+    description: "Lokalny biznes w Warszawie",
+    accent: "Zwiększ widoczność",
   },
   {
     icon: Briefcase,
-    title: "Każdy rodzaj firmy w Warszawie",
-    description: "Dopasujemy rozwiązanie do Twoich potrzeb. Profesjonalne strony dla różnych branż.",
-    keywords: ["strony dla wszystkich branż", "firmy każdej wielkości Warszawa", "różne branże strona internetowa"]
+    title: "Wszystkie branże",
+    description: "Każdy rodzaj działalności",
+    accent: "Dopasowane rozwiązania",
   },
 ];
 
 const ForWhoSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <section 
-      id="dla-kogo" 
-      className="section-padding relative z-10" 
-      ref={ref}
-      itemScope
-      itemType="https://schema.org/ItemList"
-    >
-      <div className="container-custom">
-        {/* Header */}
+    <section id="dla-kogo" className="py-16 px-4 md:py-20 relative" ref={ref}>
+      <div className="max-w-6xl mx-auto">
+        {/* Nagłówek z podkreśloną Warszawą */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-3xl mx-auto mb-20"
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12 md:mb-16"
         >
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="inline-block text-sm font-semibold text-accent uppercase tracking-wider mb-4"
-          >
-            Dla kogo
-          </motion.span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-            Dla kogo tworzymy strony internetowe w <span className="text-gradient-accent">Warszawie</span>?
-          </h1>
-          <p className="text-xl text-muted-foreground" itemProp="description">
-            Jako specjaliści od stron WWW w Warszawie współpracujemy z firmami każdej wielkości i branży. 
-            Tworzymy profesjonalne strony internetowe dla przedsiębiorców z Warszawy i okolic.
+          {/* Tytuł sekcji */}
+          <div className="mb-8">
+            <span className="text-lg font-bold text-orange-600 dark:text-orange-400 uppercase tracking-wider inline-flex items-center">
+              <span className="h-px w-8 bg-gradient-to-r from-transparent to-orange-400 mr-3"></span>
+              Dla kogo tworzymy
+              <span className="h-px w-8 bg-gradient-to-l from-transparent to-orange-400 ml-3"></span>
+            </span>
+          </div>
+          
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            Strony WWW dla firm w{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10 bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
+                Warszawie
+              </span>
+              <motion.div 
+                className="absolute -bottom-2 left-0 right-0 h-3 bg-gradient-to-r from-orange-400/40 via-orange-500/60 to-amber-400/40 rounded-full blur-sm"
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              />
+              <motion.div 
+                className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 via-orange-500 to-amber-400 rounded-full"
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              />
+            </span>
+          </h2>
+          
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-lg">
+            Specjalizujemy się w tworzeniu profesjonalnych stron internetowych dla różnych branż
           </p>
         </motion.div>
 
-        {/* Cards Grid */}
-        <div 
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
-          itemProp="itemListElement"
-          itemScope
-          itemType="https://schema.org/ListItem"
-        >
+        {/* Fiszki - grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-12 md:mb-16">
           {targets.map((target, index) => (
             <motion.div
               key={index}
-              initial={{
-                opacity: 0,
-                x: index % 2 === 0 ? -60 : 60,
-                y: 30,
-              }}
-              animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{
-                duration: 0.8,
-                delay: 0.2 + index * 0.1,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 0.5,
+                delay: index * 0.08,
+                type: "spring",
+                stiffness: 80,
+                damping: 12
+              }}
+              whileHover={{ 
+                y: -6,
+                transition: { duration: 0.2 }
               }}
               className="group"
-              itemProp="item"
-              itemScope
-              itemType="https://schema.org/Service"
             >
-              <div 
-                className="glass-card-hover rounded-3xl p-8 h-full relative overflow-hidden"
-                role="article"
-                aria-label={`Strona internetowa dla ${target.title.toLowerCase()}`}
-              >
-                {/* Gradient overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <motion.div
-                    className="w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/15 to-accent/5 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-500"
-                    whileHover={{ rotate: [0, -5, 5, 0] }}
-                    aria-hidden="true"
-                  >
-                    <target.icon className="w-7 h-7 text-accent" />
-                  </motion.div>
-
-                  {/* Content */}
-                  <h2 className="text-lg font-bold text-foreground mb-2 group-hover:text-accent transition-colors duration-300" itemProp="name">
-                    {target.title}
-                  </h2>
-                  <meta itemProp="serviceType" content="Tworzenie stron internetowych" />
-                  <meta itemProp="areaServed" content="Warszawa, Mazowieckie" />
-                  <p className="text-muted-foreground text-sm leading-relaxed" itemProp="description">
-                    {target.description}
-                  </p>
-                  <div className="mt-3">
-                    <meta itemProp="keywords" content={target.keywords.join(", ")} />
+              {/* Ramka fiszki */}
+              <div className="relative h-full p-5 md:p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-orange-300 dark:hover:border-orange-500/50 hover:shadow-xl transition-all duration-300 overflow-hidden">
+                
+                {/* Pomarańczowy gradient w tle */}
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-400/5 to-amber-500/5 group-hover:from-orange-400/10 group-hover:to-amber-500/10 transition-opacity duration-300 rounded-bl-full" />
+                
+                {/* Pomarańczowy akcent w rogu */}
+                <div className="absolute top-3 right-3 w-2 h-2 bg-gradient-to-r from-orange-400 to-amber-400 rounded-full group-hover:scale-150 transition-transform duration-300" />
+                
+                {/* Header fiszki */}
+                <div className="flex items-start gap-4 mb-4 relative">
+                  {/* Ikona w pomarańczowym kole */}
+                  <div className="relative flex-shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center shadow-lg group-hover:from-orange-500 group-hover:to-amber-600 transition-all duration-300">
+                      <target.icon className="w-6 h-6 text-white" />
+                    </div>
+                    {/* Pomarańczowe halo */}
+                    <motion.div 
+                      className="absolute -inset-2 rounded-xl bg-gradient-to-br from-orange-400/20 to-amber-500/10 blur-md"
+                      animate={{ 
+                        opacity: [0.2, 0.3, 0.2],
+                      }}
+                      transition={{ 
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Nagłówek fiszki */}
+                  <div className="flex-1">
+                    <h3 className="font-bold text-gray-900 dark:text-white text-lg md:text-xl mb-1 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-300">
+                      {target.title}
+                    </h3>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 rounded-full border border-orange-100 dark:border-orange-900/20">
+                      <Sparkles className="w-3 h-3 text-orange-500" />
+                      <span className="text-xs font-medium text-orange-600 dark:text-orange-400">
+                        {target.accent}
+                      </span>
+                    </div>
                   </div>
                 </div>
+
+                {/* Opis */}
+                <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base mb-6 leading-relaxed">
+                  {target.description}
+                </p>
+
+                {/* Dolny pasek - bez "więcej" */}
+                <div className="pt-4 border-t border-gray-100 dark:border-gray-700/50">
+                  <div className="flex items-center">
+                    <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                      Warszawa • Strona WWW
+                    </span>
+                    <motion.div 
+                      className="ml-auto w-6 h-6 flex items-center justify-center text-orange-500"
+                      animate={{ scale: [1, 1.1, 1] }}
+                      transition={{ 
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: index * 0.3
+                      }}
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Pomarańczowa ramka na hover */}
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-orange-200 dark:group-hover:border-orange-500/20 rounded-2xl transition-all duration-300 pointer-events-none" />
               </div>
             </motion.div>
           ))}
@@ -150,23 +198,47 @@ const ForWhoSection = () => {
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center"
         >
           <motion.a
             href="#kontakt"
-            className="btn-accent text-base"
-            whileHover={{ scale: 1.05 }}
+            className="group inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 hover:from-orange-600 hover:via-amber-600 hover:to-orange-700 text-white font-semibold px-7 md:px-9 py-4 md:py-5 rounded-xl hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+            whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            aria-label="Zamów stronę internetową w Warszawie - formularz kontaktowy"
           >
-            Zamów profesjonalną stronę WWW w Warszawie
-            <ArrowRight size={18} />
+            {/* Efekt transportujący */}
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0"
+              animate={{ x: ["-100%", "100%"] }}
+              transition={{ 
+                duration: 1.5, 
+                repeat: Infinity,
+                ease: "linear"
+              }}
+            />
+            
+            {/* Tekst i ikona transportująca */}
+            <span className="relative z-10 text-base md:text-lg">Zamów profesjonalną stronę WWW</span>
+            <div className="relative z-10 flex items-center">
+              <ExternalLink className="w-5 h-5 mr-2 group-hover:rotate-45 transition-transform duration-300" />
+              <motion.div
+                animate={{ x: [0, 4, 0] }}
+                transition={{ 
+                  duration: 1.5,
+                  repeat: Infinity
+                }}
+              >
+                <ArrowRight className="w-4 h-4" />
+              </motion.div>
+            </div>
           </motion.a>
-          <p className="mt-4 text-sm text-muted-foreground">
-            Strony internetowe dla firm z Warszawy i okolic Mazowsza
+          
+          <p className="mt-5 text-sm text-gray-500 dark:text-gray-400 flex items-center justify-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-gradient-to-r from-orange-400 to-amber-400" />
+            Darmowa wycena • Realizacja 7-14 dni • Warszawa i okolice
           </p>
         </motion.div>
       </div>

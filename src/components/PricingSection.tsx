@@ -11,7 +11,10 @@ import {
   TrendingUp,
   Crown,
   Rocket,
-  MailIcon
+  MailIcon,
+  ArrowRight,
+  MessageSquare,
+  Calendar,
 } from "lucide-react";
 
 const plans = [
@@ -143,12 +146,12 @@ const PricingSection = () => {
   return (
     <section 
       id="cennik" 
-      className="section-padding relative z-10" 
+      className="py-16 px-4 md:py-20 relative" 
       ref={ref}
       itemScope
       itemType="https://schema.org/Product"
     >
-      <div className="container-custom">
+      <div className="max-w-6xl mx-auto">
         {/* Schema.org for Pricing */}
         <div className="sr-only" itemScope itemType="https://schema.org/AggregateOffer">
           <link itemProp="url" href="#cennik" />
@@ -165,27 +168,30 @@ const PricingSection = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-3xl mx-auto mb-16 lg:mb-20"
+          className="text-center max-w-3xl mx-auto mb-16"
         >
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-primary/5 text-primary text-sm font-medium mb-4 border border-primary/20"
           >
             <Rocket size={14} />
             Pakiety stron internetowych
           </motion.span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-            Cennik stron internetowych dla <span className="text-gradient-primary">Twojej firmy</span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            Cennik stron internetowych dla{" "}
+            <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+              Twojej firmy
+            </span>
           </h1>
-          <p className="text-lg lg:text-xl text-muted-foreground">
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Kompletne rozwiązania dopasowane do potrzeb i budżetu. Tworzymy strony, które konwertują
           </p>
         </motion.div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
           {plans.map((plan, index) => {
             const colors = getCardColors(plan);
             const BadgeIcon = plan.badge?.icon;
@@ -212,7 +218,7 @@ const PricingSection = () => {
                     <meta itemProp="keywords" content={plan.seoKeywords.join(", ")} />
                   </div>
 
-                  {/* Badge - przyczepiony do karty */}
+                  {/* Badge */}
                   {plan.badge && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.8, y: -20 }}
@@ -235,7 +241,7 @@ const PricingSection = () => {
                       delay: 0.2 + index * 0.15,
                       ease: [0.22, 1, 0.36, 1],
                     }}
-                    className={`h-full rounded-3xl p-6 lg:p-8 transition-all duration-500 relative overflow-hidden border ${colors.border} ${colors.bg} ${colors.hover} ${plan.badge ? 'pt-12' : 'pt-8'}`}
+                    className={`h-full rounded-2xl p-6 transition-all duration-500 relative overflow-hidden border ${colors.border} ${colors.bg} ${colors.hover} ${plan.badge ? 'pt-12' : 'pt-6'}`}
                     role="article"
                     aria-label={`Pakiet ${plan.name} - ${plan.price} zł`}
                   >
@@ -244,20 +250,20 @@ const PricingSection = () => {
 
                     <div className="relative z-10">
                       {/* Plan header */}
-                      <div className="flex items-start justify-between mb-6">
-                        <div className="flex items-center gap-4">
-                          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 ${
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
                             plan.popular || plan.color === "premium"
                               ? "bg-white/20"
                               : "bg-primary/10"
                           }`}>
-                            <PlanIcon size={28} className={colors.text} />
+                            <PlanIcon size={24} className={colors.text} />
                           </div>
                           <div>
-                            <h2 className={`text-xl lg:text-2xl font-bold ${colors.text} mb-1`}>
+                            <h2 className={`text-lg font-bold ${colors.text} mb-1`}>
                               {plan.name}
                             </h2>
-                            <p className={`text-sm ${colors.textLight}`}>
+                            <p className={`text-xs ${colors.textLight}`}>
                               {plan.tagline}
                             </p>
                           </div>
@@ -265,20 +271,20 @@ const PricingSection = () => {
                       </div>
 
                       {/* Time */}
-                      <div className="flex items-center gap-2 mb-6">
-                        <Clock size={16} className={colors.accent} />
-                        <span className={`text-sm font-medium ${colors.textLight}`}>
+                      <div className="flex items-center gap-2 mb-4">
+                        <Clock size={14} className={colors.accent} />
+                        <span className={`text-xs font-medium ${colors.textLight}`}>
                           Realizacja: {plan.time}
                         </span>
                       </div>
 
                       {/* Price */}
-                      <div className="mb-8 pb-8 border-b border-white/10">
+                      <div className="mb-6 pb-4 border-b border-white/10">
                         <div className="flex items-baseline">
-                          <span className={`text-4xl lg:text-5xl font-bold ${colors.text}`} itemProp="price">
+                          <span className={`text-3xl font-bold ${colors.text}`} itemProp="price">
                             {plan.price}
                           </span>
-                          <span className={`text-lg ml-2 ${colors.textLight}`} itemProp="priceCurrency">
+                          <span className={`text-base ml-1 ${colors.textLight}`} itemProp="priceCurrency">
                             {plan.period}
                           </span>
                         </div>
@@ -286,24 +292,24 @@ const PricingSection = () => {
 
                       {/* Features */}
                       <div className="mb-6">
-                        <h3 className={`font-semibold text-sm mb-4 ${colors.textLight}`}>
+                        <h3 className={`font-semibold text-xs mb-3 ${colors.textLight}`}>
                           Co zawiera pakiet:
                         </h3>
-                        <ul className="space-y-2.5">
+                        <ul className="space-y-2">
                           {plan.features.map((feature, i) => (
                             <li
                               key={i}
-                              className="flex items-start gap-3 text-xs sm:text-sm"
+                              className="flex items-start gap-2 text-xs"
                             >
                               <div
-                                className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                                className={`w-3 h-3 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
                                   plan.popular || plan.color === "premium"
                                     ? "bg-white/20"
                                     : "bg-primary/10"
                                 }`}
                               >
                                 <Check
-                                  size={10}
+                                  size={8}
                                   className={
                                     plan.popular || plan.color === "premium"
                                       ? "text-white"
@@ -320,8 +326,8 @@ const PricingSection = () => {
                       </div>
 
                       {/* Description */}
-                      <div className="mb-8 p-4 rounded-xl bg-white/5">
-                        <p className={`text-xs sm:text-sm ${colors.textLight}`} itemProp="description">
+                      <div className="mb-6 p-3 rounded-lg bg-white/5">
+                        <p className={`text-xs ${colors.textLight}`} itemProp="description">
                           {plan.description}
                         </p>
                       </div>
@@ -331,17 +337,17 @@ const PricingSection = () => {
                         href="#kontakt"
                         whileHover={{ scale: 1.03 }}
                         whileTap={{ scale: 0.98 }}
-                        className={`block w-full text-center py-3 lg:py-3.5 px-6 rounded-2xl font-bold transition-all duration-300 ${
+                        className={`block w-full text-center py-2.5 px-4 rounded-xl font-medium transition-all duration-300 ${
                           plan.popular
-                            ? "bg-white text-gray-900 hover:bg-gray-100 shadow-lg"
+                            ? "bg-white text-gray-900 hover:bg-gray-100 shadow-md"
                             : plan.color === "premium"
-                            ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg hover:shadow-purple-500/30 border border-purple-500/30"
-                            : "bg-primary text-white hover:shadow-lg hover:shadow-primary/30"
+                            ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-md hover:shadow-purple-500/30"
+                            : "bg-gradient-to-r from-primary to-primary/80 text-white hover:shadow-md hover:shadow-primary/30"
                         }`}
                         aria-label={`Wybierz pakiet ${plan.name} za ${plan.price} zł`}
                         itemProp="url"
                       >
-                        <MailIcon size={16} className="inline mr-2" />
+                        <MailIcon size={14} className="inline mr-2" />
                         Skontaktuj się
                       </motion.a>
                     </div>
@@ -353,7 +359,7 @@ const PricingSection = () => {
         </div>
 
         {/* Hidden SEO Content */}
-        <div className="mt-12 sr-only">
+        <div className="mt-8 sr-only">
           <h2>Cennik tworzenia stron internetowych WebBoss</h2>
           <p>
             Oferujemy przystępny cennik tworzenia stron internetowych dla firm i przedsiębiorców. 
@@ -371,26 +377,73 @@ const PricingSection = () => {
           </p>
         </div>
 
-        {/* Additional info */}
+        {/* Nowy CTA sekcja zamiast additional info */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-12 pt-8 border-t border-border"
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="text-center"
         >
-          <p className="text-muted-foreground text-lg mb-4">
-            Potrzebujesz indywidualnej wyceny lub masz niestandardowe wymagania?
-          </p>
-          <a 
-            href="#kontakt" 
-            className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary/80 transition-colors"
-            aria-label="Skontaktuj się w sprawie indywidualnej wyceny strony internetowej"
-          >
-            <MailIcon size={18} />
-            Skontaktuj się z nami po spersonalizowaną ofertę
-          </a>
-          <p className="text-sm text-muted-foreground mt-4">
-            Wszystkie ceny podane w złotych netto. Oferujemy elastyczne warunki współpracy.
+          <div className="inline-block p-1 rounded-2xl bg-gradient-to-r from-primary/20 via-primary/10 to-transparent mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-gray-800">
+              <Calendar className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                Darmowa konsultacja online
+              </span>
+            </div>
+          </div>
+
+          <div className="relative max-w-2xl mx-auto">
+            {/* Glow background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/5 blur-3xl opacity-50 rounded-3xl" />
+            
+            <div className="relative bg-gradient-to-r from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 md:p-8 shadow-xl">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="text-left">
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                    Potrzebujesz indywidualnej oferty?
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
+                    Omówimy Twój projekt, doradzimy najlepsze rozwiązanie i przygotujemy spersonalizowaną wycenę
+                  </p>
+                </div>
+                
+                <motion.a
+                  href="#kontakt"
+                  className="group inline-flex items-center gap-3 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white font-semibold px-6 py-3 rounded-xl hover:shadow-lg transition-all duration-300 whitespace-nowrap"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <MessageSquare className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium">Umów bezpłatną</span>
+                    <span className="text-base font-bold">konsultację</span>
+                  </div>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </motion.a>
+              </div>
+              
+              <div className="mt-6 pt-6 border-t border-gray-100 dark:border-gray-700 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                <span className="flex items-center gap-1">
+                  <Check className="w-4 h-4 text-green-500" />
+                  Darmowa wycena w 24h
+                </span>
+                <span className="hidden md:inline">•</span>
+                <span className="flex items-center gap-1">
+                  <Check className="w-4 h-4 text-green-500" />
+                  Bez zobowiązań
+                </span>
+                <span className="hidden md:inline">•</span>
+                <span className="flex items-center gap-1">
+                  <Check className="w-4 h-4 text-green-500" />
+                  Elastyczne warunki
+                </span>
+              </div>
+            </div>
+          </div>
+          
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-6">
+            Wszystkie ceny podane w złotych netto. Oferujemy elastyczne warunki współpracy i płatności.
           </p>
         </motion.div>
       </div>
