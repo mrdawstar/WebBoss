@@ -43,7 +43,7 @@ const AboutSection = () => {
     },
     { 
       icon: Brain, 
-      label: "Programowanie & Szachy ", 
+      label: "Programowanie & Szachy", 
       color: "text-green-500",
     },
     { 
@@ -55,7 +55,7 @@ const AboutSection = () => {
 
   const stats = [
     { value: "20+", label: "Projektów" },
-    { value: "100%", label: "Zadowolenia" },
+    { value: "100%", label: "Zadowolonych klientów" },
     { value: "24h", label: "Odpowiedź" },
   ];
 
@@ -67,6 +67,11 @@ const AboutSection = () => {
       itemScope 
       itemType="https://schema.org/Person"
     >
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-blue-50/5 to-transparent" />
+      <div className="absolute top-1/4 left-10% w-80 h-80 bg-blue-400/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-1/4 right-10% w-80 h-80 bg-purple-400/10 rounded-full blur-3xl -z-10" />
+      
       <div className="container-custom">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -90,12 +95,12 @@ const AboutSection = () => {
             >
               {/* Photo Container */}
               <div className="relative">
-                {/* Main photo - glass card style */}
+                {/* Main photo - glass card style - 20% transparency */}
                 <div 
-                  className="glass-card rounded-3xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all duration-500"
+                  className="bg-white/20 backdrop-blur-sm rounded-3xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all duration-500 border border-white/30"
                   itemProp="image"
                 >
-                  <div className="aspect-[4/5] relative overflow-hidden">
+                  <div className="aspect-[4/5] relative overflow-hidden rounded-3xl">
                     <img 
                       src="/avatar.PNG"
                       alt="Dawid - Web Developer tworzący nowoczesne strony internetowe" 
@@ -115,12 +120,12 @@ const AboutSection = () => {
                   </div>
                 </div>
 
-                {/* Floating badge - glass card style */}
+                {/* Floating badge - 20% transparency */}
                 <motion.div
                   initial={{ y: 20, opacity: 0 }}
                   animate={isInView ? { y: 0, opacity: 1 } : {}}
                   transition={{ delay: 0.3 }}
-                  className="glass-card absolute -top-3 -right-3 px-5 py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-300 border border-white/20"
+                  className="bg-white/20 backdrop-blur-sm absolute -top-3 -right-3 px-5 py-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-300 border border-white/30"
                   aria-label="Ekspert w tworzeniu stron internetowych"
                 >
                   <div className="flex items-center gap-2">
@@ -130,7 +135,7 @@ const AboutSection = () => {
                 </motion.div>
               </div>
 
-              {/* Stats - glass card style */}
+              {/* Stats - 20% transparency */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -140,7 +145,7 @@ const AboutSection = () => {
                 {stats.map((stat, index) => (
                   <div 
                     key={index} 
-                    className="glass-card text-center p-4 rounded-2xl border border-white/10 hover:border-primary/30 transition-all duration-300"
+                    className="bg-white/20 backdrop-blur-sm text-center p-4 rounded-2xl border border-white/30 hover:border-primary/50 transition-all duration-300"
                     itemProp="makesOffer"
                   >
                     <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
@@ -159,7 +164,7 @@ const AboutSection = () => {
             >
               {/* Header */}
               <div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 mb-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 mb-6 backdrop-blur-sm">
                   <Sparkles size={14} className="text-primary" />
                   <span className="text-sm font-medium text-primary">O mnie</span>
                 </div>
@@ -184,7 +189,7 @@ const AboutSection = () => {
                 </p>
               </div>
 
-              {/* Passions */}
+              {/* Passions - 20% transparency */}
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
                   <Zap size={18} className="text-primary" />
@@ -194,10 +199,10 @@ const AboutSection = () => {
                   {passions.map((passion, index) => (
                     <div 
                       key={index}
-                      className="glass-card flex items-center gap-3 p-3 rounded-xl border border-white/10 hover:border-primary/30 transition-all duration-300"
+                      className="bg-white/20 backdrop-blur-sm flex items-center gap-3 p-3 rounded-xl border border-white/30 hover:border-primary/50 transition-all duration-300"
                       itemProp="knowsAbout"
                     >
-                      <div className={`p-2 rounded-lg ${passion.color.replace('text', 'bg')}/10`}>
+                      <div className={`p-2 rounded-lg ${passion.color.replace('text', 'bg')}/20 backdrop-blur-sm`}>
                         <passion.icon size={16} className={passion.color} />
                       </div>
                       <span className="text-sm font-medium text-foreground">{passion.label}</span>
@@ -206,7 +211,7 @@ const AboutSection = () => {
                 </div>
               </div>
 
-              {/* Skills */}
+              {/* Skills - 20% transparency */}
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-4">Umiejętności techniczne</h3>
                 <div className="grid grid-cols-2 gap-2">
@@ -216,7 +221,7 @@ const AboutSection = () => {
                       initial={{ opacity: 0, x: -10 }}
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{ delay: 0.4 + index * 0.05 }}
-                      className="glass-card flex items-center gap-2 p-3 rounded-lg hover:border-primary/30 transition-all duration-300 border border-transparent"
+                      className="bg-white/20 backdrop-blur-sm flex items-center gap-2 p-3 rounded-lg hover:border-primary/50 transition-all duration-300 border border-white/30"
                       itemProp="knowsAbout"
                     >
                       <CheckCircle size={14} className="text-primary flex-shrink-0" />
@@ -242,7 +247,7 @@ const AboutSection = () => {
                   
                   <a
                     href="tel:+48796425392"
-                    className="glass-card inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 border border-white/10"
+                    className="bg-white/20 backdrop-blur-sm border border-white/30 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold hover:scale-[1.02] active:scale-[0.98] hover:bg-white/30 transition-all duration-300"
                     aria-label="Zadzwoń do twórcy stron internetowych"
                     itemProp="telephone"
                   >
@@ -252,7 +257,7 @@ const AboutSection = () => {
                 </div>
                 
                 {/* Trust note */}
-                <p className="text-sm text-muted-foreground mt-4 italic">
+                <p className="text-sm text-muted-foreground mt-4 italic bg-white/10 backdrop-blur-sm rounded-xl p-4">
                   "Profesjonalne podejście i zaangażowanie w każdy projekt tworzenia stron"
                 </p>
               </div>

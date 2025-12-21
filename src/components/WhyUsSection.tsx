@@ -40,18 +40,25 @@ const WhyUsSection = () => {
   return (
     <section 
       id="o-nas" 
-      className="section-padding relative z-10" 
+      className="section-padding relative z-10 overflow-hidden" 
       ref={ref}
       itemScope
       itemType="https://schema.org/WebPageElement"
     >
+      {/* Background gradient */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-blue-50/5 to-transparent" />
+      
+      {/* Decorative blurs */}
+      <div className="absolute top-1/4 left-5% w-80 h-80 bg-blue-400/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-1/4 right-5% w-80 h-80 bg-purple-400/5 rounded-full blur-3xl -z-10" />
+      
       <div className="container-custom">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-3xl mx-auto mb-20"
+          className="text-center max-w-3xl mx-auto mb-16 lg:mb-20"
         >
           <motion.span
             initial={{ opacity: 0, y: 20 }}
@@ -64,13 +71,13 @@ const WhyUsSection = () => {
           <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
             Dlaczego warto wybrać <span className="text-gradient-primary">WebBoss</span> w <span className="text-gradient-primary">Warszawie</span>?
           </h2>
-          <p className="text-xl text-muted-foreground" itemProp="description">
+          <p className="text-lg sm:text-xl text-muted-foreground" itemProp="description">
             Jako doświadczeni specjaliści od stron internetowych w Warszawie, tworzymy strony WWW, które 
             wyróżniają się użytecznością, skutecznością i przynoszą realne efekty dla firm z Warszawy.
           </p>
         </motion.div>
 
-        {/* Features Grid */}
+        {/* Features Grid - Ujednolicone dla tel i komp */}
         <div 
           className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
           itemScope
@@ -91,39 +98,83 @@ const WhyUsSection = () => {
               itemScope
               itemType="https://schema.org/Service"
             >
+              {/* PRZEZROCZYSTA FISZKA 10% - dla tel i komp */}
               <div 
-                className="glass-card-hover rounded-3xl p-8 h-full card-glow"
+                className="relative rounded-3xl p-6 lg:p-8 h-full overflow-hidden transition-all duration-500 bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/30 hover:bg-white/15 hover:shadow-2xl hover:shadow-blue-500/10"
                 role="article"
                 aria-label={`${feature.title} - WebBoss Warszawa`}
               >
-                {/* Icon */}
-                <motion.div
-                  className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500"
-                  whileHover={{ rotate: [0, -10, 10, 0] }}
-                  transition={{ duration: 0.5 }}
-                  aria-hidden="true"
-                >
-                  <feature.icon className="w-8 h-8 text-primary" />
-                </motion.div>
+                {/* Gradient glow effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-purple-500/0 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
+                
+                {/* Dla telefonów - ikonka i tytuł w jednej linii */}
+                <div className="lg:hidden flex items-start gap-4 mb-4">
+                  {/* Ikonka */}
+                  <div className="flex-shrink-0">
+                    <motion.div
+                      className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center border border-blue-200/20"
+                      whileHover={{ rotate: [0, -10, 10, 0] }}
+                      transition={{ duration: 0.5 }}
+                      aria-hidden="true"
+                    >
+                      <feature.icon className="w-6 h-6 text-primary" />
+                    </motion.div>
+                  </div>
+                  
+                  {/* Tytuł obok ikonki - kolor jak główny nagłówek */}
+                  <h3 className="text-lg font-bold flex-1" itemProp="name">
+                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      {feature.title}
+                    </span>
+                  </h3>
+                </div>
 
-                {/* Content */}
-                <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300" itemProp="name">
-                  {feature.title}
-                </h3>
-                <meta itemProp="serviceType" content="Tworzenie stron internetowych" />
-                <meta itemProp="areaServed" content="Warszawa, Mazowieckie" />
-                <p className="text-muted-foreground leading-relaxed" itemProp="description">
-                  {feature.description}
-                </p>
-                <div className="mt-3">
-                  <meta itemProp="keywords" content={feature.keywords.join(", ")} />
+                {/* Dla komputerów - ikonka nad tytułem */}
+                <div className="hidden lg:block">
+                  {/* Ikonka */}
+                  <motion.div
+                    className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-6 border border-blue-200/30 group-hover:scale-110 transition-transform duration-500"
+                    whileHover={{ rotate: [0, -10, 10, 0] }}
+                    transition={{ duration: 0.5 }}
+                    aria-hidden="true"
+                  >
+                    <feature.icon className="w-8 h-8 text-primary group-hover:text-blue-600 transition-colors duration-300" />
+                  </motion.div>
+                  
+                  {/* Tytuł pod ikonką */}
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300" itemProp="name">
+                    {feature.title}
+                  </h3>
+                </div>
+                
+                {/* Opis - ten sam dla tel i komp */}
+                <div className="lg:mt-0">
+                  <meta itemProp="serviceType" content="Tworzenie stron internetowych" />
+                  <meta itemProp="areaServed" content="Warszawa, Mazowieckie" />
+                  
+                  <p className="text-sm lg:text-base text-muted-foreground leading-relaxed group-hover:text-gray-700 transition-colors duration-300" itemProp="description">
+                    {feature.description}
+                  </p>
+                  
+                  <div className="mt-3">
+                    <meta itemProp="keywords" content={feature.keywords.join(", ")} />
+                  </div>
+                </div>
+                
+                {/* Hover indicator */}
+                <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 flex items-center justify-center">
+                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Additional SEO Content - Hidden visually but accessible to search engines */}
+        {/* Additional SEO Content */}
         <div className="mt-16 text-center">
           <div className="sr-only" aria-hidden="true">
             <h3>WebBoss - profesjonalne strony internetowe Warszawa</h3>
@@ -145,7 +196,7 @@ const WhyUsSection = () => {
           </div>
           
           <p className="text-lg text-muted-foreground mt-8">
-            Wybierając <strong>WebBoss Warszawa</strong>, wybierasz profesjonalne podejście do 
+            Wybierając <strong className="text-gradient-primary">WebBoss Warszawa</strong>, wybierasz profesjonalne podejście do 
             tworzenia stron internetowych i realne efekty dla Twojej firmy.
           </p>
         </div>

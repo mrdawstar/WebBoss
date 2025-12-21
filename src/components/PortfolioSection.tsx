@@ -65,7 +65,7 @@ const PortfolioSection = () => {
     >
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 blur-3xl rounded-full" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 blur-4xl rounded-full" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/5 blur-3xl rounded-full" />
       </div>
 
@@ -153,7 +153,7 @@ const PortfolioSection = () => {
               <meta itemProp="location" content="Warszawa, Polska" />
               
               {/* Card */}
-              <div className="relative h-full rounded-3xl overflow-hidden border border-border bg-background/50 backdrop-blur-sm shadow-lg shadow-black/5 group-hover:shadow-xl group-hover:shadow-primary/10 transition-all duration-500">
+              <div className="relative h-full rounded-3xl overflow-hidden border border-border bg-background/20 backdrop-blur-sm shadow-lg shadow-black/5 group-hover:shadow-xl group-hover:shadow-primary/10 transition-all duration-500">
                 {/* Browser Top Bar */}
                 <div className="h-10 bg-gradient-to-r from-secondary to-secondary/80 flex items-center gap-2 px-4 border-b border-border">
                   <div className="flex gap-1.5">

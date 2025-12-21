@@ -178,31 +178,189 @@ const HeroSection = () => {
     <>
       <HelmetSEO />
 
-        {/* subtle background glow */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-[-25%] left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-primary/10 blur-[120px] rounded-full" />
+      {/* subtle background glow */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-[-25%] left-1/2 -translate-x-1/2 w-[1000px] h-[1000px] bg-primary/10 blur-[120px] rounded-full" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-24 lg:pb-32">
+        <meta itemProp="mainContentOfPage" content="Strony internetowe Warszawa - tworzenie profesjonalnych stron WWW" />
+        
+        {/* Grid dla desktopa (lg:grid-cols-2) */}
+        <div className="hidden lg:grid lg:grid-cols-2 gap-8 lg:gap-24 items-center">
+          {/* Left content - tekst dla desktopa */}
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: { transition: { staggerChildren: 0.2 } },
+            }}
+            className="max-w-2xl"
+            itemScope
+            itemType="https://schema.org/Service"
+          >
+            <meta itemProp="serviceType" content="Tworzenie stron internetowych" />
+            <meta itemProp="areaServed" content="Warszawa, Mazowieckie" />
+            
+            <motion.div variants={fadeSlow} className="mb-10">
+              <span className="inline-block px-6 py-2 rounded-full border border-border text-sm tracking-wide text-muted-foreground">
+                Profesjonalne strony WWW — <strong itemProp="location">Warszawa</strong>
+              </span>
+            </motion.div>
+
+            <motion.h1
+              variants={fadeSlow}
+              className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-10"
+              itemProp="name"
+            >
+              Potrzebujesz
+              <br />
+              <span className="text-primary">nowoczesnej strony</span>
+              <br />
+              internetowej w <span itemProp="location">Warszawie</span>?
+            </motion.h1>
+
+            {/* POPRAWIONE: Zamieniamy <p> na <div> bo zawiera <div> wewnątrz */}
+            <motion.div
+              variants={fadeSlow}
+              className="text-lg sm:text-xl text-gray-700 max-w-xl mb-12 leading-relaxed"
+              itemProp="description"
+            >
+              <p className="text-gray-700 mb-6">
+                Jako <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent font-bold">specjalista od stron internetowych</span> w <span className="text-primary font-semibold">Warszawie</span>,
+                {" "}projektuję i tworzę strony WWW dla firm z Warszawy i okolic, które chcą:
+              </p>
+              
+              <div className="mt-6 space-y-4">
+                {/* Punkt 1 */}
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mr-3 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center shadow-sm">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-gray-800 font-semibold text-purple-800">Profesjonalny wizerunek</span>
+                  </div>
+                </div>
+
+                {/* Punkt 2 */}
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mr-3 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-700 to-purple-900 flex items-center justify-center shadow-sm">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-gray-800 font-semibold text-purple-800">Przyciąganie klientów</span>
+                  </div>
+                </div>
+
+                {/* Punkt 3 */}
+                <div className="flex items-start">
+                  <div className="flex-shrink-0 mr-3 mt-0.5">
+                    <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-800 to-purple-950 flex items-center justify-center shadow-sm">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-gray-800 font-semibold text-purple-800">Wzrost sprzedaży</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeSlow}
+              className="flex flex-wrap gap-6"
+            >
+              {/* Primary Button - Enhanced with whileHover and whileTap animations */}
+              <motion.a
+                href="#kontakt"
+                className="relative inline-flex items-center gap-2 bg-primary text-primary-foreground text-lg px-8 py-4 rounded-lg overflow-hidden group"
+                aria-label="Zamów stronę internetową w Warszawie"
+                whileHover="primaryHover"
+                whileTap="primaryTap"
+                variants={buttonVariants}
+              >
+                {/* Animated background shine effect */}
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                
+                {/* Button content */}
+                <span className="relative">Zamów stronę WWW</span>
+                <motion.span
+                  whileHover={{ x: 3 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowRight size={20} />
+                </motion.span>
+              </motion.a>
+
+              {/* Secondary Button - Enhanced with whileHover and whileTap animations */}
+              <motion.a
+                href="#portfolio"
+                className="inline-flex items-center gap-2 border border-border text-lg px-8 py-4 rounded-lg group relative overflow-hidden"
+                aria-label="Zobacz portfolio stron internetowych Warszawa"
+                whileHover="secondaryHover"
+                whileTap="secondaryTap"
+                variants={buttonVariants}
+              >
+                {/* Subtle background effect on hover */}
+                <span className="absolute inset-0 bg-gradient-to-br from-white-50/0 via-white-100/0 to-white-50/0 group-hover:from-white-50/10 group-hover:via-white-100/20 group-hover:to-white-50/10 transition-all duration-300" />
+                
+                {/* Button content */}
+                <span className="relative">Zobacz realizacje z Warszawy</span>
+              </motion.a>
+            </motion.div>
+          </motion.div>
+
+          {/* Right content – animacja Lottie dla desktopa */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 1.6,
+              delay: 0.3,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="relative"
+          >
+            <div className="w-full h-[500px] lg:h-[600px]">
+              <LargeAnimatedLottie />
+            </div>
+          </motion.div>
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-24 lg:pb-32">
-          <meta itemProp="mainContentOfPage" content="Strony internetowe Warszawa - tworzenie profesjonalnych stron WWW" />
-          
-          {/* Grid dla desktopa (lg:grid-cols-2) */}
-          <div className="hidden lg:grid lg:grid-cols-2 gap-8 lg:gap-24 items-center">
-            {/* Left content - tekst dla desktopa */}
+        {/* Layout dla telefonów (mobile-first) - animacja w tle */}
+        <div className="lg:hidden">
+          {/* Kontener z pozycją względną dla animacji w tle */}
+          <div className="relative">
+            {/* Animacja Lottie - na telefonie w tle, BARDZIEJ przezroczysta */}
+            <div className="absolute inset-0 z-0 opacity-20 h-[500px] sm:h-[600px]">
+              <LargeAnimatedLottie />
+            </div>
+
+            {/* Tekst na wierzchu - z-index wyższy niż animacja */}
             <motion.div
               initial="hidden"
               animate="visible"
               variants={{
                 visible: { transition: { staggerChildren: 0.2 } },
               }}
-              className="max-w-2xl"
+              className="relative z-10 max-w-2xl"
               itemScope
               itemType="https://schema.org/Service"
             >
               <meta itemProp="serviceType" content="Tworzenie stron internetowych" />
               <meta itemProp="areaServed" content="Warszawa, Mazowieckie" />
               
-              <motion.div variants={fadeSlow} className="mb-10">
+              <motion.div variants={fadeSlow} className="mb-8">
                 <span className="inline-block px-6 py-2 rounded-full border border-border text-sm tracking-wide text-muted-foreground">
                   Profesjonalne strony WWW — <strong itemProp="location">Warszawa</strong>
                 </span>
@@ -210,31 +368,77 @@ const HeroSection = () => {
 
               <motion.h1
                 variants={fadeSlow}
-                className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-10"
+                className="text-5xl sm:text-6xl font-bold leading-[1.05] mb-8"
                 itemProp="name"
               >
                 Potrzebujesz
                 <br />
                 <span className="text-primary">nowoczesnej strony</span>
                 <br />
-                internetowej w <span itemProp="location">Warszawa</span>?
+                internetowej w <span itemProp="location">Warszawie</span>?
               </motion.h1>
 
-              <motion.p
+              {/* POPRAWIONE: Zamieniamy <p> na <div> bo zawiera <div> wewnątrz */}
+              <motion.div
                 variants={fadeSlow}
-                className="text-xl sm:text-2xl text-black max-w-xl mb-12"
+                className="text-lg sm:text-xl text-gray-700 max-w-xl mb-12 leading-relaxed"
                 itemProp="description"
               >
-                Jako <strong>specjalista od stron internetowych w Warszawie</strong>, projektuję i tworzę 
-                strony WWW dla firm z Warszawy i okolic, które chcą wyglądać profesjonalnie, 
-                przyciągać klientów i zwiększać sprzedaż.
-              </motion.p>
+                <p className="text-gray-700 mb-6">
+                  Jako <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent font-bold">specjalista od stron internetowych</span> w <span className="text-primary font-semibold">Warszawie</span>,
+                  {" "}projektuję i tworzę strony WWW dla firm z Warszawy i okolic, które chcą:
+                </p>
+                
+                <div className="mt-6 space-y-4">
+                  {/* Punkt 1 */}
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 mr-3 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center shadow-sm">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="text-gray-800 font-semibold text-purple-800">Profesjonalny wizerunek</span>
+                    </div>
+                  </div>
+
+                  {/* Punkt 2 */}
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 mr-3 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-700 to-purple-900 flex items-center justify-center shadow-sm">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="text-gray-800 font-semibold text-purple-800">Przyciąganie klientów</span>
+                    </div>
+                  </div>
+
+                  {/* Punkt 3 */}
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 mr-3 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-800 to-purple-950 flex items-center justify-center shadow-sm">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="text-gray-800 font-semibold text-purple-800">Wzrost sprzedaży</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
 
               <motion.div
                 variants={fadeSlow}
                 className="flex flex-wrap gap-6"
               >
-                {/* Primary Button - Enhanced with whileHover and whileTap animations */}
+                {/* Primary Button for Mobile */}
                 <motion.a
                   href="#kontakt"
                   className="relative inline-flex items-center gap-2 bg-primary text-primary-foreground text-lg px-8 py-4 rounded-lg overflow-hidden group"
@@ -246,7 +450,6 @@ const HeroSection = () => {
                   {/* Animated background shine effect */}
                   <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                   
-                  {/* Button content */}
                   <span className="relative">Zamów stronę WWW</span>
                   <motion.span
                     whileHover={{ x: 3 }}
@@ -256,7 +459,7 @@ const HeroSection = () => {
                   </motion.span>
                 </motion.a>
 
-                {/* Secondary Button - Enhanced with whileHover and whileTap animations */}
+                {/* Secondary Button for Mobile */}
                 <motion.a
                   href="#portfolio"
                   className="inline-flex items-center gap-2 border border-border text-lg px-8 py-4 rounded-lg group relative overflow-hidden"
@@ -268,124 +471,13 @@ const HeroSection = () => {
                   {/* Subtle background effect on hover */}
                   <span className="absolute inset-0 bg-gradient-to-br from-gray-50/0 via-gray-100/0 to-gray-50/0 group-hover:from-gray-50/10 group-hover:via-gray-100/20 group-hover:to-gray-50/10 transition-all duration-300" />
                   
-                  {/* Button content */}
                   <span className="relative">Zobacz realizacje z Warszawy</span>
                 </motion.a>
               </motion.div>
             </motion.div>
-
-            {/* Right content – animacja Lottie dla desktopa */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 1.6,
-                delay: 0.3,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="relative"
-            >
-              <div className="w-full h-[500px] lg:h-[600px]">
-                <LargeAnimatedLottie />
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Layout dla telefonów (mobile-first) - animacja w tle */}
-          <div className="lg:hidden">
-            {/* Kontener z pozycją względną dla animacji w tle */}
-            <div className="relative">
-              {/* Animacja Lottie - na telefonie w tle, BARDZIEJ przezroczysta */}
-              <div className="absolute inset-0 z-0 opacity-20 h-[500px] sm:h-[600px]">
-                <LargeAnimatedLottie />
-              </div>
-
-              {/* Tekst na wierzchu - z-index wyższy niż animacja */}
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  visible: { transition: { staggerChildren: 0.2 } },
-                }}
-                className="relative z-10 max-w-2xl"
-                itemScope
-                itemType="https://schema.org/Service"
-              >
-                <meta itemProp="serviceType" content="Tworzenie stron internetowych" />
-                <meta itemProp="areaServed" content="Warszawa, Mazowieckie" />
-                
-                <motion.div variants={fadeSlow} className="mb-8">
-                  <span className="inline-block px-6 py-2 rounded-full border border-border text-sm tracking-wide text-muted-foreground">
-                    Profesjonalne strony WWW — <strong itemProp="location">Warszawa</strong>
-                  </span>
-                </motion.div>
-
-                <motion.h1
-                  variants={fadeSlow}
-                  className="text-5xl sm:text-6xl font-bold leading-[1.05] mb-8"
-                  itemProp="name"
-                >
-                  Potrzebujesz
-                  <br />
-                  <span className="text-primary">nowoczesnej strony</span>
-                  <br />
-                  internetowej w <span itemProp="location">Warszawa</span>?
-                </motion.h1>
-
-                <motion.p
-                  variants={fadeSlow}
-                  className="text-xl sm:text-2xl text-black max-w-xl mb-10"
-                  itemProp="description"
-                >
-                  Jako <strong>specjalista od stron internetowych w Warszawie</strong>, projektuję i tworzę 
-                  strony WWW dla firm z Warszawy i okolic, które chcą wyglądać profesjonalnie, 
-                  przyciągać klientów i zwiększać sprzedaż.
-                </motion.p>
-
-                <motion.div
-                  variants={fadeSlow}
-                  className="flex flex-wrap gap-6"
-                >
-                  {/* Primary Button for Mobile */}
-                  <motion.a
-                    href="#kontakt"
-                    className="relative inline-flex items-center gap-2 bg-primary text-primary-foreground text-lg px-8 py-4 rounded-lg overflow-hidden group"
-                    aria-label="Zamów stronę internetową w Warszawie"
-                    whileHover="primaryHover"
-                    whileTap="primaryTap"
-                    variants={buttonVariants}
-                  >
-                    {/* Animated background shine effect */}
-                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                    
-                    <span className="relative">Zamów stronę WWW</span>
-                    <motion.span
-                      whileHover={{ x: 3 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <ArrowRight size={20} />
-                    </motion.span>
-                  </motion.a>
-
-                  {/* Secondary Button for Mobile */}
-                  <motion.a
-                    href="#portfolio"
-                    className="inline-flex items-center gap-2 border border-border text-lg px-8 py-4 rounded-lg group relative overflow-hidden"
-                    aria-label="Zobacz portfolio stron internetowych Warszawa"
-                    whileHover="secondaryHover"
-                    whileTap="secondaryTap"
-                    variants={buttonVariants}
-                  >
-                    {/* Subtle background effect on hover */}
-                    <span className="absolute inset-0 bg-gradient-to-br from-gray-50/0 via-gray-100/0 to-gray-50/0 group-hover:from-gray-50/10 group-hover:via-gray-100/20 group-hover:to-gray-50/10 transition-all duration-300" />
-                    
-                    <span className="relative">Zobacz realizacje z Warszawy</span>
-                  </motion.a>
-                </motion.div>
-              </motion.div>
-            </div>
           </div>
         </div>
+      </div>
     </>
   );
 };

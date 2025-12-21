@@ -14,7 +14,8 @@ import {
   Target,
   Sparkles,
   ArrowRight,
-  ChevronRight
+  ChevronRight,
+  ChevronDown
 } from "lucide-react";
 
 const ProcessSection = () => {
@@ -103,6 +104,11 @@ const ProcessSection = () => {
       itemScope 
       itemType="https://schema.org/WebPage"
     >
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+      <div className="absolute top-20 left-10% w-96 h-96 bg-blue-400/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-20 right-10% w-96 h-96 bg-purple-400/10 rounded-full blur-3xl -z-10" />
+      
       <div className="container-custom">
         {/* Schema.org for Process */}
         <div className="sr-only">
@@ -120,7 +126,7 @@ const ProcessSection = () => {
           itemScope
           itemType="https://schema.org/HowTo"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 backdrop-blur-sm mb-4">
             <Target size={14} className="text-primary" />
             <span className="text-sm font-medium text-primary">Proces współpracy</span>
           </div>
@@ -134,7 +140,7 @@ const ProcessSection = () => {
             Wiesz na czym stoisz w każdej chwili realizacji projektu.
           </p>
 
-          {/* Benefits */}
+          {/* Benefits - 20% transparency */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -146,7 +152,7 @@ const ProcessSection = () => {
                 key={index}
                 whileHover={{ scale: 1.05, y: -2 }}
                 transition={{ duration: 0.3 }}
-                className="glass-card flex items-center gap-2 px-4 py-2 rounded-full hover:border-primary/30 transition-all duration-300"
+                className="bg-white/20 backdrop-blur-sm border border-white/30 flex items-center gap-2 px-4 py-2 rounded-full hover:border-primary/50 transition-all duration-300"
                 aria-label={benefit.text}
               >
                 <benefit.icon size={16} className="text-primary" />
@@ -156,13 +162,12 @@ const ProcessSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Vertical Timeline - ALTERNATING */}
+        {/* Vertical Timeline - ALTERNATING - bez pionowej linii, za to ze strzałeczkami */}
         <div className="max-w-5xl mx-auto">
           <div className="relative">
-            {/* Center line - hidden behind cards */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-primary to-accent transform -translate-x-1/2 hidden lg:block pointer-events-none" style={{ zIndex: 1 }} />
+            {/* USUNIĘTO: Center line - hidden behind cards */}
             
-            <div className="space-y-12 lg:space-y-16 relative" style={{ zIndex: 2 }}>
+            <div className="space-y-12 lg:space-y-16 relative">
               {steps.map((step, index) => {
                 const isEven = index % 2 === 0;
                 const stepRef = useRef(null);
@@ -184,42 +189,76 @@ const ProcessSection = () => {
                     <meta itemProp="description" content={step.description} />
                     <meta itemProp="keywords" content={step.seoKeywords.join(", ")} />
 
-                    {/* Content wrapper */}
-                    <div className={`flex ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 items-start`}>
-                      {/* Left/Right spacer for desktop */}
-                      <div className="hidden lg:flex flex-1" />
+                    {/* Content wrapper - dla tel flex-col, dla komp z strzałeczkami */}
+                    <div className="flex flex-col lg:flex-row gap-8 items-start">
+                      {/* Lewa strona dla komputerów (dla parzystych pustka, dla nieparzystych strzałka) */}
+                      <div className="hidden lg:flex flex-1 items-center justify-end relative">
+                        {!isEven && (
+                          <div className="relative">
+                            {/* Strzałka skierowana w lewo dla nieparzystych */}
+                            <motion.div
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={isInView ? { opacity: 1, x: 0 } : {}}
+                              transition={{ delay: index * 0.2 }}
+                              className="flex items-center gap-2"
+                            >
+                              <span className="text-sm text-muted-foreground">Etap {step.number}</span>
+                              <div className="w-20 h-0.5 bg-gradient-to-l from-primary to-transparent" />
+                              <ChevronRight className="text-primary transform rotate-180" size={20} />
+                            </motion.div>
+                          </div>
+                        )}
+                      </div>
 
-                      {/* Card */}
+                      {/* Card - 20% transparency - ZAWSZE na środku dla komputerów */}
                       <motion.div
                         whileHover={{ scale: 1.02, y: -5 }}
                         transition={{ duration: 0.3 }}
-                        className="w-full lg:w-1/2 relative"
+                        className="w-full lg:w-2/3 relative"
                         style={{ zIndex: 10 }}
                         role="article"
                         aria-label={`Etap ${index + 1}: ${step.title}`}
                       >
-                        <div className="glass-card p-6 lg:p-8 rounded-3xl hover:border-primary/30 transition-all duration-500 shadow-lg hover:shadow-2xl hover:shadow-primary/20">
+                        <div className="bg-white/20 backdrop-blur-sm border border-white/30 p-6 lg:p-8 rounded-3xl hover:border-primary/50 transition-all duration-500 shadow-lg hover:shadow-2xl hover:shadow-primary/20">
                           {/* Step number and title */}
                           <div className="flex items-start gap-4 mb-6">
                             <motion.div
                               initial={{ scale: 0, rotate: -180 }}
                               animate={isInView ? { scale: 1, rotate: 0 } : {}}
                               transition={{ duration: 0.5, delay: index * 0.2 + 0.1, type: "spring", stiffness: 200 }}
-                              className={`w-16 h-16 rounded-2xl ${step.bgColor} flex items-center justify-center flex-shrink-0`}
+                              className={`w-16 h-16 rounded-2xl ${step.bgColor} backdrop-blur-sm flex items-center justify-center flex-shrink-0 border border-white/30`}
                               aria-hidden="true"
                             >
                               <step.icon className={`w-8 h-8 ${step.color}`} />
                             </motion.div>
                             
-                            <div>
-                              <motion.div
-                                initial={{ opacity: 0, x: isEven ? -20 : 20 }}
-                                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                                transition={{ delay: index * 0.2 + 0.15 }}
-                                className="text-4xl font-bold text-primary/20 mb-1"
-                              >
-                                {step.number}
-                              </motion.div>
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between">
+                                <motion.div
+                                  initial={{ opacity: 0, x: isEven ? -20 : 20 }}
+                                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                                  transition={{ delay: index * 0.2 + 0.15 }}
+                                  className="text-4xl font-bold text-primary/20 mb-1"
+                                >
+                                  {step.number}
+                                </motion.div>
+                                
+                                {/* Strzałki dla telefonów - zawsze pod spodem */}
+                                <div className="lg:hidden">
+                                  {index < steps.length - 1 && (
+                                    <motion.div
+                                      initial={{ opacity: 0 }}
+                                      animate={isInView ? { opacity: 1 } : {}}
+                                      transition={{ delay: index * 0.2 + 0.3 }}
+                                      className="flex items-center gap-2 text-primary"
+                                    >
+                                      <span className="text-sm">Następny krok</span>
+                                      <ChevronDown size={20} className="animate-bounce" />
+                                    </motion.div>
+                                  )}
+                                </div>
+                              </div>
+                              
                               <h3 className="text-2xl font-bold text-foreground" itemProp="name">{step.title}</h3>
                             </div>
                           </div>
@@ -253,9 +292,39 @@ const ProcessSection = () => {
                         </div>
                       </motion.div>
 
-                      {/* Right/Left spacer for desktop */}
-                      <div className="hidden lg:flex flex-1" />
+                      {/* Prawa strona dla komputerów (dla parzystych strzałka, dla nieparzystych pustka) */}
+                      <div className="hidden lg:flex flex-1 items-center relative">
+                        {isEven && index < steps.length - 1 && (
+                          <div className="relative">
+                            {/* Strzałka skierowana w prawo dla parzystych */}
+                            <motion.div
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={isInView ? { opacity: 1, x: 0 } : {}}
+                              transition={{ delay: index * 0.2 }}
+                              className="flex items-center gap-2"
+                            >
+                              <ChevronRight className="text-primary" size={20} />
+                              <div className="w-20 h-0.5 bg-gradient-to-r from-primary to-transparent" />
+                              <span className="text-sm text-muted-foreground">Etap {(index + 1).toString().padStart(2, '0')}</span>
+                            </motion.div>
+                          </div>
+                        )}
+                      </div>
                     </div>
+
+                    {/* Strzałka w dół dla telefonów między krokami */}
+                    {index < steps.length - 1 && (
+                      <div className="lg:hidden flex justify-center mt-6">
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                          transition={{ delay: index * 0.2 + 0.4 }}
+                          className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center"
+                        >
+                          <ChevronDown className="text-primary" size={20} />
+                        </motion.div>
+                      </div>
+                    )}
                   </motion.div>
                 );
               })}
@@ -274,7 +343,7 @@ const ProcessSection = () => {
           </p>
         </div>
 
-        {/* Final CTA */}
+        {/* Final CTA - 20% transparency */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -286,13 +355,13 @@ const ProcessSection = () => {
           }}
           className="text-center mt-16 lg:mt-20"
         >
-          <div className="relative overflow-hidden glass-card max-w-2xl mx-auto p-8 rounded-3xl">
+          <div className="relative overflow-hidden bg-white/20 backdrop-blur-sm border border-white/30 max-w-2xl mx-auto p-8 rounded-3xl">
             {/* Background gradient animation */}
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
               animate={isInView ? { scale: 1, opacity: 0.1 } : {}}
               transition={{ delay: 1.2, duration: 1 }}
-              className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20"
+              className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 backdrop-blur-sm"
               style={{ borderRadius: 'inherit' }}
             />
 
@@ -319,7 +388,7 @@ const ProcessSection = () => {
                   damping: 10
                 }}
                 whileHover={{ rotate: 360, scale: 1.1 }}
-                className="w-20 h-20 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center mx-auto mb-6 shadow-xl shadow-primary/30"
+                className="w-20 h-20 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center mx-auto mb-6 shadow-xl shadow-primary/30 backdrop-blur-sm"
                 aria-hidden="true"
               >
                 <Users className="text-white" size={32} />
@@ -397,7 +466,7 @@ const ProcessSection = () => {
                   initial={{ x: 20, opacity: 0 }}
                   animate={isInView ? { x: 0, opacity: 1 } : {}}
                   transition={{ delay: 1.6 }}
-                  className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl glass-card font-semibold overflow-hidden"
+                  className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 font-semibold overflow-hidden hover:bg-white/30"
                   aria-label="Zobacz przykładowe projekty stron internetowych"
                 >
                   {/* Hover effect */}
@@ -412,12 +481,12 @@ const ProcessSection = () => {
                 </motion.a>
               </motion.div>
 
-              {/* Stats with animation */}
+              {/* Stats with animation - 20% transparency */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 1.7 }}
-                className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-10 border-t border-white/10"
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 pt-10 border-t border-white/20"
               >
                 {[
                   { value: "24h", label: "Szybka wycena strony" },
@@ -431,7 +500,7 @@ const ProcessSection = () => {
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ delay: 1.8 + index * 0.1 }}
                     whileHover={{ y: -5 }}
-                    className="text-center p-4 rounded-2xl hover:bg-white/5 transition-all duration-300"
+                    className="text-center p-4 rounded-2xl bg-white/20 backdrop-blur-sm hover:bg-white/30 transition-all duration-300 border border-white/30"
                     aria-label={`${stat.value} ${stat.label}`}
                   >
                     <div className="text-2xl font-bold text-gradient-primary mb-1">{stat.value}</div>

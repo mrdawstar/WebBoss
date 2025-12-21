@@ -112,6 +112,12 @@ const ContactSection = () => {
         }}
       />
       
+      {/* Subtle background gradient */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+      
+      {/* Decorative blurs */}
+
+      
       <div className="container-custom">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
@@ -144,7 +150,7 @@ const ContactSection = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="glass-card rounded-3xl p-8 md:p-12 text-center"
+              className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-3xl p-8 md:p-12 text-center"
             >
               <div className="max-w-2xl mx-auto">
                 {/* Animated Checkmark */}
@@ -213,7 +219,7 @@ const ContactSection = () => {
                   transition={{ duration: 0.6, delay: 0.6 }}
                   className="space-y-6 mb-10"
                 >
-                  <div className="flex items-center justify-center gap-4 text-lg text-muted-foreground">
+                  <div className="flex items-center justify-center gap-4 text-lg text-muted-foreground bg-white/5 backdrop-blur-sm rounded-2xl p-6">
                     <Clock className="text-accent" size={24} />
                     <span>
                       <strong className="text-foreground">Odpowiemy jak najszybciej</strong> 
@@ -222,7 +228,7 @@ const ContactSection = () => {
                     </span>
                   </div>
 
-                  <div className="bg-gradient-to-r from-primary/5 to-accent/5 rounded-2xl p-6 mt-8">
+                  <div className="bg-gradient-to-r from-primary/5 to-accent/5 backdrop-blur-sm rounded-2xl p-6">
                     <PartyPopper className="inline-block mr-2 text-yellow-500 mb-3" size={24} />
                     <p className="text-foreground font-medium mb-2">
                       Twoja wycena jest już w przygotowaniu!
@@ -232,7 +238,7 @@ const ContactSection = () => {
                     </p>
                   </div>
 
-                  <div className="text-sm text-muted-foreground bg-background/50 rounded-xl p-4">
+                  <div className="text-sm text-muted-foreground bg-white/20 backdrop-blur-sm rounded-xl p-4">
                     <p className="font-medium text-foreground mb-1">📞 Potrzebujesz szybkiej odpowiedzi?</p>
                     <p>Zadzwoń: <strong className="text-foreground">+48 123 456 789</strong></p>
                   </div>
@@ -249,7 +255,7 @@ const ContactSection = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={resetForm}
-                    className="px-8 py-3 bg-primary text-primary-foreground rounded-2xl font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all"
+                    className="px-8 py-3 bg-primary text-primary-foreground rounded-2xl font-semibold hover:shadow-lg hover:shadow-primary/30 transition-all backdrop-blur-sm"
                   >
                     Wyślij kolejną wiadomość
                   </motion.button>
@@ -258,7 +264,7 @@ const ContactSection = () => {
                     href="#"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-8 py-3 glass-card rounded-2xl font-semibold hover:shadow-lg transition-all"
+                    className="px-8 py-3 bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl font-semibold hover:bg-white/15 hover:shadow-lg transition-all"
                   >
                     Zobacz portfolio
                   </motion.a>
@@ -276,7 +282,7 @@ const ContactSection = () => {
             >
               <form
                 onSubmit={handleSubmit}
-                className="glass-card rounded-3xl p-8 md:p-12"
+                className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-3xl p-8 md:p-12"
               >
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Name */}
@@ -300,7 +306,7 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       onFocus={() => setFocusedField("name")}
                       onBlur={() => setFocusedField(null)}
-                      className="input-premium"
+                      className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full"
                       placeholder="Jan Kowalski"
                       disabled={isSubmitting}
                     />
@@ -327,7 +333,7 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       onFocus={() => setFocusedField("email")}
                       onBlur={() => setFocusedField(null)}
-                      className="input-premium"
+                      className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full"
                       placeholder="jan@firma.pl"
                       disabled={isSubmitting}
                     />
@@ -353,7 +359,7 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       onFocus={() => setFocusedField("phone")}
                       onBlur={() => setFocusedField(null)}
-                      className="input-premium"
+                      className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full"
                       placeholder="+48 123 456 789"
                       disabled={isSubmitting}
                     />
@@ -379,7 +385,7 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       onFocus={() => setFocusedField("company")}
                       onBlur={() => setFocusedField(null)}
-                      className="input-premium"
+                      className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full"
                       placeholder="Moja Firma Sp. z o.o."
                       disabled={isSubmitting}
                     />
@@ -405,7 +411,7 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       onFocus={() => setFocusedField("type")}
                       onBlur={() => setFocusedField(null)}
-                      className="input-premium"
+                      className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full appearance-none"
                       disabled={isSubmitting}
                     >
                       <option value="">Wybierz...</option>
@@ -437,7 +443,7 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       onFocus={() => setFocusedField("budget")}
                       onBlur={() => setFocusedField(null)}
-                      className="input-premium"
+                      className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full appearance-none"
                       disabled={isSubmitting}
                     >
                       <option value="">Wybierz...</option>
@@ -470,7 +476,7 @@ const ContactSection = () => {
                       onChange={handleInputChange}
                       onFocus={() => setFocusedField("deadline")}
                       onBlur={() => setFocusedField(null)}
-                      className="input-premium"
+                      className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full"
                       placeholder="np. do końca stycznia, jak najszybciej..."
                       disabled={isSubmitting}
                     />
@@ -498,7 +504,7 @@ const ContactSection = () => {
                       rows={5}
                       onFocus={() => setFocusedField("message")}
                       onBlur={() => setFocusedField(null)}
-                      className="input-premium resize-none"
+                      className="bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-4 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full resize-none"
                       placeholder="Opisz czego potrzebujesz, jakie masz oczekiwania..."
                       disabled={isSubmitting}
                     />
@@ -522,10 +528,10 @@ const ContactSection = () => {
                           disabled={isSubmitting}
                         />
                         <div
-                          className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all duration-300 ${
+                          className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all duration-300 bg-white/20 backdrop-blur-sm ${
                             agreed
-                              ? "bg-primary border-primary"
-                              : "border-border group-hover:border-primary"
+                              ? "border-primary bg-primary/20"
+                              : "border-white/20 group-hover:border-primary/50"
                           } ${isSubmitting ? "opacity-50" : ""}`}
                         >
                           {agreed && !isSubmitting && (
@@ -534,7 +540,7 @@ const ContactSection = () => {
                               animate={{ scale: 1 }}
                               transition={{ type: "spring", stiffness: 500 }}
                             >
-                              <Check size={16} className="text-primary-foreground" />
+                              <Check size={16} className="text-primary" />
                             </motion.div>
                           )}
                         </div>
@@ -558,10 +564,13 @@ const ContactSection = () => {
                       whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
                       whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                       disabled={isSubmitting}
-                      className={`w-full btn-cta text-lg py-5 relative overflow-hidden group ${
+                      className={`w-full bg-gradient-to-r from-primary via-accent to-primary text-primary-foreground font-semibold text-lg py-5 rounded-2xl hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 relative overflow-hidden group ${
                         isSubmitting ? "opacity-80 cursor-not-allowed" : ""
                       }`}
                     >
+                      {/* Shine effect */}
+                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
+                      
                       <span className="relative z-10 flex items-center justify-center gap-3">
                         {isSubmitting ? (
                           <>
@@ -582,7 +591,7 @@ const ContactSection = () => {
                     </motion.button>
                     
                     {/* Info Text */}
-                    <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground">
+                    <div className="flex items-center justify-center gap-2 mt-4 text-sm text-muted-foreground bg-white/5 backdrop-blur-sm rounded-xl p-4">
                       <Clock size={16} />
                       <span>Odpowiemy jak najszybciej - zwykle w ciągu kilku godzin</span>
                     </div>

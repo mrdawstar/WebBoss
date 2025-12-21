@@ -120,8 +120,8 @@ const ForWhoSection = () => {
               }}
               className="group"
             >
-              {/* Ramka fiszki */}
-              <div className="relative h-full p-5 md:p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-orange-300 dark:hover:border-orange-500/50 hover:shadow-xl transition-all duration-300 overflow-hidden">
+              {/* Ramka fiszki - ZMIENIONE NA 10% PRZEZROCZYSTOŚĆ */}
+              <div className="relative h-full p-5 md:p-6 bg-white/30 backdrop-blur-sm dark:bg-gray-800/10 rounded-2xl border border-white/20 dark:border-gray-700/20 hover:border-orange-300/50 dark:hover:border-orange-500/30 hover:shadow-xl transition-all duration-300 overflow-hidden">
                 
                 {/* Pomarańczowy gradient w tle */}
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-orange-400/5 to-amber-500/5 group-hover:from-orange-400/10 group-hover:to-amber-500/10 transition-opacity duration-300 rounded-bl-full" />
@@ -155,7 +155,7 @@ const ForWhoSection = () => {
                     <h3 className="font-bold text-gray-900 dark:text-white text-lg md:text-xl mb-1 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors duration-300">
                       {target.title}
                     </h3>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-950/30 dark:to-amber-950/30 rounded-full border border-orange-100 dark:border-orange-900/20">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-orange-50/30 to-amber-50/30 dark:from-orange-950/20 dark:to-amber-950/20 rounded-full border border-orange-100/50 dark:border-orange-900/20">
                       <Sparkles className="w-3 h-3 text-orange-500" />
                       <span className="text-xs font-medium text-orange-600 dark:text-orange-400">
                         {target.accent}
@@ -170,7 +170,7 @@ const ForWhoSection = () => {
                 </p>
 
                 {/* Dolny pasek - bez "więcej" */}
-                <div className="pt-4 border-t border-gray-100 dark:border-gray-700/50">
+                <div className="pt-4 border-t border-white/10 dark:border-gray-700/20">
                   <div className="flex items-center">
                     <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
                       Warszawa • Strona WWW
@@ -190,7 +190,7 @@ const ForWhoSection = () => {
                 </div>
 
                 {/* Pomarańczowa ramka na hover */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-orange-200 dark:group-hover:border-orange-500/20 rounded-2xl transition-all duration-300 pointer-events-none" />
+                <div className="absolute inset-0 border-2 border-transparent group-hover:border-orange-200/30 dark:group-hover:border-orange-500/20 rounded-2xl transition-all duration-300 pointer-events-none" />
               </div>
             </motion.div>
           ))}
