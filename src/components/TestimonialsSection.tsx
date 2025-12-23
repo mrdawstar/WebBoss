@@ -113,7 +113,7 @@ const TestimonialsSection = () => {
     >
       {/* NIE WIDOCZNE DLA UŻYTKOWNIKÓW - TYLKO DLA GOOGLE */}
       <div style={{ display: 'none' }}>
-        {/* Schema.org dla wszystkich opinii - POPRAWIONE */}
+        {/* Schema.org dla wszystkich opinii - POPRAWIONE WERSJA */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -124,28 +124,75 @@ const TestimonialsSection = () => {
               "item": {
                 "@type": "Review",
                 "name": `Opinia: ${testimonial.name} - ${testimonial.company}`,
-                "url": `https://webbosswarszawa.com/opinie#opinia-${testimonial.id}`,
+                "reviewBody": testimonial.text,
                 "author": {
                   "@type": "Person",
-                  "name": testimonial.name,
-                  "jobTitle": "Właściciel firmy"
+                  "name": testimonial.name
                 },
                 "itemReviewed": {
-                  "@type": "WebPage", // ZMIENIONE Z "Service" na "WebPage"
-                  "name": "Tworzenie strony internetowej",
-                  "url": "https://webbosswarszawa.com"
+                  "@type": "Service",
+                  "name": "Tworzenie stron internetowych",
+                  "serviceType": "Web Development",
+                  "provider": {
+                    "@type": "LocalBusiness",
+                    "name": "WebBoss Warszawa",
+                    "address": {
+                      "@type": "PostalAddress",
+                      "addressLocality": "Warszawa",
+                      "addressCountry": "PL"
+                    }
+                  }
                 },
                 "reviewRating": {
                   "@type": "Rating",
-                  "ratingValue": "5",
+                  "ratingValue": testimonial.rating.toString(),
                   "bestRating": "5"
                 },
-                "reviewBody": testimonial.text,
                 "datePublished": testimonial.datePublished
               }
             }))
           })}
         </script>
+
+        {/* Dodatkowo - osobne opinie dla lepszego indeksowania */}
+        {testimonials.map((testimonial) => (
+          <script
+            key={`review-${testimonial.id}`}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Review",
+                "headline": `Opinia ${testimonial.company}`,
+                "reviewBody": testimonial.text,
+                "author": {
+                  "@type": "Person",
+                  "name": testimonial.name
+                },
+                "itemReviewed": {
+                  "@type": "LocalBusiness",
+                  "name": "WebBoss Warszawa",
+                  "description": "Profesjonalne tworzenie stron internetowych",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "Warszawa",
+                    "addressCountry": "PL"
+                  }
+                },
+                "reviewRating": {
+                  "@type": "Rating",
+                  "ratingValue": testimonial.rating.toString(),
+                  "bestRating": "5"
+                },
+                "datePublished": testimonial.datePublished,
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "WebBoss Warszawa"
+                }
+              })
+            }}
+          />
+        ))}
 
         {/* Schema.org dla LocalBusiness - POPRAWIONE */}
         <script type="application/ld+json">
@@ -165,12 +212,26 @@ const TestimonialsSection = () => {
               "ratingValue": "5.0",
               "ratingCount": testimonials.length,
               "bestRating": "5"
-            }
+            },
+            "review": testimonials.map(testimonial => ({
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": testimonial.name
+              },
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": testimonial.rating.toString(),
+                "bestRating": "5"
+              },
+              "reviewBody": testimonial.text,
+              "datePublished": testimonial.datePublished
+            }))
           })}
         </script>
       </div>
 
-      {/* RESZTA KODU BEZ ZMIAN - dokładnie tak jak miałeś */}
+      {/* RESZTA KODU BEZ ZMIAN */}
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
