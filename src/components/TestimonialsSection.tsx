@@ -113,105 +113,94 @@ const TestimonialsSection = () => {
     >
       {/* NIE WIDOCZNE DLA UŻYTKOWNIKÓW - TYLKO DLA GOOGLE */}
       <div style={{ display: 'none' }}>
-        {/* Schema.org dla wszystkich opinii - POPRAWIONE WERSJA */}
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "itemListElement": testimonials.map((testimonial, index) => ({
-              "@type": "ListItem",
-              "position": index + 1,
-              "item": {
-                "@type": "Review",
-                "name": `Opinia: ${testimonial.name} - ${testimonial.company}`,
-                "reviewBody": testimonial.text,
-                "author": {
-                  "@type": "Person",
-                  "name": testimonial.name
-                },
-                "itemReviewed": {
-                  "@type": "Service",
-                  "name": "Tworzenie stron internetowych",
-                  "serviceType": "Web Development",
-                  "provider": {
-                    "@type": "LocalBusiness",
-                    "name": "WebBoss Warszawa",
-                    "address": {
-                      "@type": "PostalAddress",
-                      "addressLocality": "Warszawa",
-                      "addressCountry": "PL"
-                    }
-                  }
-                },
-                "reviewRating": {
-                  "@type": "Rating",
-                  "ratingValue": testimonial.rating.toString(),
-                  "bestRating": "5"
-                },
-                "datePublished": testimonial.datePublished
-              }
-            }))
-          })}
-        </script>
-
-        {/* Dodatkowo - osobne opinie dla lepszego indeksowania */}
-        {testimonials.map((testimonial) => (
+        {/* WERSJA UPROSZCZONA - bez ItemList */}
+        {testimonials.map((testimonial, index) => (
           <script
-            key={`review-${testimonial.id}`}
+            key={`review-simple-${testimonial.id}`}
             type="application/ld+json"
             dangerouslySetInnerHTML={{
               __html: JSON.stringify({
                 "@context": "https://schema.org",
                 "@type": "Review",
-                "headline": `Opinia ${testimonial.company}`,
+                "headline": `Opinia o WebBoss Warszawa od ${testimonial.name}`,
+                "description": testimonial.text,
                 "reviewBody": testimonial.text,
                 "author": {
                   "@type": "Person",
-                  "name": testimonial.name
+                  "name": testimonial.name,
+                  "affiliation": {
+                    "@type": "Organization",
+                    "name": testimonial.company
+                  }
                 },
                 "itemReviewed": {
                   "@type": "LocalBusiness",
                   "name": "WebBoss Warszawa",
-                  "description": "Profesjonalne tworzenie stron internetowych",
+                  "description": "Tworzenie stron internetowych dla firm w Warszawie",
                   "address": {
                     "@type": "PostalAddress",
                     "addressLocality": "Warszawa",
-                    "addressCountry": "PL"
-                  }
+                    "addressCountry": "Poland"
+                  },
+                  "url": "https://webbosswarszawa.com",
+                  "telephone": "+48 796 425 392", // DODAJ NUMER TELEFONU
+                  "priceRange": "$$",
+                  "areaServed": "Warszawa i okolice"
                 },
                 "reviewRating": {
                   "@type": "Rating",
                   "ratingValue": testimonial.rating.toString(),
-                  "bestRating": "5"
+                  "bestRating": "5",
+                  "worstRating": "1"
                 },
                 "datePublished": testimonial.datePublished,
                 "publisher": {
                   "@type": "Organization",
                   "name": "WebBoss Warszawa"
+                },
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": `https://webbosswarszawa.com/opinie#opinia-${testimonial.id}`
                 }
               })
             }}
           />
         ))}
 
-        {/* Schema.org dla LocalBusiness - POPRAWIONE */}
+        {/* GŁÓWNA STRUKTURA LOCALBUSINESS Z AGGREGATERATING */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
-            "name": "WebBoss - Tworzenie stron internetowych Warszawa",
-            "description": "Profesjonalne tworzenie stron internetowych dla firm w Warszawie",
-            "url": "https://webbosswarszawa.com",
+            "name": "WebBoss Warszawa",
+            "alternateName": "WebBoss - Tworzenie Stron Internetowych Warszawa",
+            "description": "Profesjonalne tworzenie stron internetowych dla firm w Warszawie. Strony WWW, sklepy internetowe, SEO.",
+            "url": "https://webbosswarszawa.com",// DODAJ LOGO
+            "telephone": "+48 796 425 392", // DODAJ NUMER TELEFONU
+            "email": "daveditcreation@gmail.com", // DODAJ EMAIL
+            "priceRange": "$$",
             "address": {
-              "@type": "PostalAddress",
+              "@type": "PostalAddress", // DODAJ ADRES
               "addressLocality": "Warszawa",
+              "postalCode": "00-000",
               "addressCountry": "PL"
             },
+            "geo": {
+              "@type": "GeoCoordinates",
+              "latitude": "52.2297",
+              "longitude": "21.0122"
+            },
+            "areaServed": {
+              "@type": "City",
+              "name": "Warszawa"
+            },
+            "openingHours": "24/7",
             "aggregateRating": {
               "@type": "AggregateRating",
               "ratingValue": "5.0",
-              "ratingCount": testimonials.length,
-              "bestRating": "5"
+              "ratingCount": testimonials.length.toString(),
+              "bestRating": "5",
+              "worstRating": "1"
             },
             "review": testimonials.map(testimonial => ({
               "@type": "Review",
@@ -226,7 +215,32 @@ const TestimonialsSection = () => {
               },
               "reviewBody": testimonial.text,
               "datePublished": testimonial.datePublished
-            }))
+            })),
+            "makesOffer": [{
+              "@type": "Offer",
+              "name": "Tworzenie strony internetowej",
+              "description": "Profesjonalna strona internetowa dla Twojej firmy"
+            }, {
+              "@type": "Offer",
+              "name": "Sklep internetowy",
+              "description": "Nowoczesny e-commerce dla Twojego biznesu"
+            }]
+          })}
+        </script>
+
+        {/* DODATKOWO: WebSite Schema */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "WebBoss Warszawa",
+            "alternateName": "Tworzenie stron internetowych Warszawa",
+            "url": "https://webbosswarszawa.com",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://webbosswarszawa.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
           })}
         </script>
       </div>
