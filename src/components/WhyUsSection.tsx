@@ -77,7 +77,7 @@ const WhyUsSection = () => {
           </p>
         </motion.div>
 
-        {/* Features Grid - Ujednolicone dla tel i komp */}
+        {/* Features Grid */}
         <div 
           className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
           itemScope
@@ -98,67 +98,39 @@ const WhyUsSection = () => {
               itemScope
               itemType="https://schema.org/Service"
             >
-              {/* PRZEZROCZYSTA FISZKA 10% - dla tel i komp */}
-              <div 
-                className="relative rounded-3xl p-6 lg:p-8 h-full overflow-hidden transition-all duration-500 bg-white/10 backdrop-blur-sm border border-white/20 hover:border-white/30 hover:bg-white/15 hover:shadow-2xl hover:shadow-blue-500/10"
+              {/* DLA KOMPUTERÓW - oryginalny układ */}
+              <div className="hidden lg:block relative rounded-3xl p-6 lg:p-8 h-full overflow-hidden transition-all duration-500 bg-white/30 backdrop-blur-sm border border-white/20 hover:border-white/70 hover:bg-white/20 hover:shadow-2xl hover:shadow-blue-500/10"
                 role="article"
                 aria-label={`${feature.title} - WebBoss Warszawa`}
               >
                 {/* Gradient glow effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/0 via-blue-500/5 to-purple-500/0 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
                 
-                {/* Dla telefonów - ikonka i tytuł w jednej linii */}
-                <div className="lg:hidden flex items-start gap-4 mb-4">
-                  {/* Ikonka */}
-                  <div className="flex-shrink-0">
-                    <motion.div
-                      className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center border border-blue-200/20"
-                      whileHover={{ rotate: [0, -10, 10, 0] }}
-                      transition={{ duration: 0.5 }}
-                      aria-hidden="true"
-                    >
-                      <feature.icon className="w-6 h-6 text-primary" />
-                    </motion.div>
-                  </div>
-                  
-                  {/* Tytuł obok ikonki - kolor jak główny nagłówek */}
-                  <h3 className="text-lg font-bold flex-1" itemProp="name">
-                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                      {feature.title}
-                    </span>
-                  </h3>
-                </div>
-
-                {/* Dla komputerów - ikonka nad tytułem */}
-                <div className="hidden lg:block">
-                  {/* Ikonka */}
-                  <motion.div
-                    className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-6 border border-blue-200/30 group-hover:scale-110 transition-transform duration-500"
-                    whileHover={{ rotate: [0, -10, 10, 0] }}
-                    transition={{ duration: 0.5 }}
-                    aria-hidden="true"
-                  >
-                    <feature.icon className="w-8 h-8 text-primary group-hover:text-blue-600 transition-colors duration-300" />
-                  </motion.div>
-                  
-                  {/* Tytuł pod ikonką */}
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300" itemProp="name">
-                    {feature.title}
-                  </h3>
-                </div>
+                {/* Ikonka */}
+                <motion.div
+                  className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center mb-6 border border-blue-200/30 group-hover:scale-110 transition-transform duration-500"
+                  whileHover={{ rotate: [0, -10, 10, 0] }}
+                  transition={{ duration: 0.5 }}
+                  aria-hidden="true"
+                >
+                  <feature.icon className="w-8 h-8 text-primary group-hover:text-blue-600 transition-colors duration-300" />
+                </motion.div>
                 
-                {/* Opis - ten sam dla tel i komp */}
-                <div className="lg:mt-0">
-                  <meta itemProp="serviceType" content="Tworzenie stron internetowych" />
-                  <meta itemProp="areaServed" content="Warszawa, Mazowieckie" />
-                  
-                  <p className="text-sm lg:text-base text-muted-foreground leading-relaxed group-hover:text-gray-700 transition-colors duration-300" itemProp="description">
-                    {feature.description}
-                  </p>
-                  
-                  <div className="mt-3">
-                    <meta itemProp="keywords" content={feature.keywords.join(", ")} />
-                  </div>
+                {/* Tytuł */}
+                <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300" itemProp="name">
+                  {feature.title}
+                </h3>
+                
+                {/* Opis */}
+                <meta itemProp="serviceType" content="Tworzenie stron internetowych" />
+                <meta itemProp="areaServed" content="Warszawa, Mazowieckie" />
+                
+                <p className="text-sm lg:text-base text-muted-foreground leading-relaxed group-hover:text-gray-700 transition-colors duration-300" itemProp="description">
+                  {feature.description}
+                </p>
+                
+                <div className="mt-3">
+                  <meta itemProp="keywords" content={feature.keywords.join(", ")} />
                 </div>
                 
                 {/* Hover indicator */}
@@ -167,6 +139,29 @@ const WhyUsSection = () => {
                     <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* DLA TELEFONÓW - uproszczony układ bez ramek */}
+              <div className="lg:hidden">
+                <div className="flex items-start gap-4 p-5 rounded-2xl bg-gradient-to-br from-white/40 to-white/10 backdrop-blur-sm hover:bg-white/60 transition-all duration-300">
+                  {/* Ikona - prostsza wersja */}
+                  <div className="flex-shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 flex items-center justify-center">
+                      <feature.icon className="w-6 h-6 text-primary" />
+                    </div>
+                  </div>
+                  
+                  {/* Treść */}
+                  <div className="flex-1">
+                    <h3 className="text-base font-semibold text-gray-800 mb-1.5" itemProp="name">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 leading-relaxed" itemProp="description">
+                      {feature.description}
+                    </p>
+                    <meta itemProp="keywords" content={feature.keywords.join(", ")} />
                   </div>
                 </div>
               </div>

@@ -144,25 +144,28 @@ const PricingSection = () => {
   };
 
   return (
-    <section 
-      id="cennik" 
-      className="py-16 px-4 md:py-20 relative" 
+    <section
+      id="cennik"
+      className="py-16 px-4 md:py-20 relative"
       ref={ref}
       itemScope
-      itemType="https://schema.org/Product"
+      itemType="https://schema.org/Service"
     >
-      <div className="max-w-6xl mx-auto">
-        {/* Schema.org for Pricing */}
-        <div className="sr-only" itemScope itemType="https://schema.org/AggregateOffer">
-          <link itemProp="url" href="#cennik" />
-          <meta itemProp="name" content="Cennik stron internetowych WebBoss" />
-          <meta itemProp="description" content="Profesjonalne pakiety tworzenia stron internetowych w atrakcyjnych cenach" />
-          <meta itemProp="lowPrice" content="1000" />
-          <meta itemProp="highPrice" content="3000" />
-          <meta itemProp="priceCurrency" content="PLN" />
-          <meta itemProp="availability" content="https://schema.org/InStock" />
-        </div>
+      {/* Główne Schema.org dla sekcji usług */}
+      <div className="sr-only">
+        <meta itemProp="name" content="Tworzenie stron internetowych – WebBoss" />
+        <meta
+          itemProp="description"
+          content="Projektowanie i tworzenie stron internetowych: landing page, strony firmowe oraz pakiety premium."
+        />
+        <link itemProp="url" href="https://webbosswarszawa.com/#cennik" />
+        <meta itemProp="provider" content="WebBoss" />
+        <meta itemProp="areaServed" content="Warszawa, Polska" />
+        <meta itemProp="serviceType" content="Web Development" />
+        <meta itemProp="serviceAudience" content="Firmy, Przedsiębiorcy" />
+      </div>
 
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -203,21 +206,35 @@ const PricingSection = () => {
                 className="relative"
                 itemScope
                 itemType="https://schema.org/Offer"
+                itemProp="offers"
               >
+                {/* Schema.org dla każdego pakietu */}
+                <div className="sr-only">
+                  <meta itemProp="name" content={`Pakiet ${plan.name}`} />
+                  <meta itemProp="description" content={plan.description} />
+                  <meta itemProp="price" content={plan.price} />
+                  <meta itemProp="priceCurrency" content="PLN" />
+                  <meta itemProp="availability" content="https://schema.org/InStock" />
+                  <meta itemProp="validFrom" content="2024-01-01" />
+                  <link itemProp="url" href="https://webbosswarszawa.com/#kontakt" />
+                  <div itemProp="eligibleRegion" itemScope itemType="https://schema.org/Country">
+                    <meta itemProp="name" content="Polska" />
+                  </div>
+                  <div itemProp="eligibleRegion" itemScope itemType="https://schema.org/City">
+                    <meta itemProp="name" content="Warszawa" />
+                  </div>
+                  <div itemProp="priceSpecification" itemScope itemType="https://schema.org/PriceSpecification">
+                    <meta itemProp="price" content={plan.price} />
+                    <meta itemProp="priceCurrency" content="PLN" />
+                    <meta itemProp="valueAddedTaxIncluded" content="false" />
+                  </div>
+                </div>
+
                 <motion.div
                   whileHover={{ scale: 1.03 }}
                   transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   className="relative"
                 >
-                  {/* Schema.org for each plan */}
-                  <div className="sr-only">
-                    <meta itemProp="name" content={plan.name} />
-                    <meta itemProp="description" content={plan.description} />
-                    <meta itemProp="price" content={plan.price} />
-                    <meta itemProp="priceCurrency" content="PLN" />
-                    <meta itemProp="keywords" content={plan.seoKeywords.join(", ")} />
-                  </div>
-
                   {/* Badge */}
                   {plan.badge && (
                     <motion.div
@@ -260,10 +277,10 @@ const PricingSection = () => {
                             <PlanIcon size={24} className={colors.text} />
                           </div>
                           <div>
-                            <h2 className={`text-lg font-bold ${colors.text} mb-1`}>
+                            <h2 className={`text-lg font-bold ${colors.text} mb-1`} itemProp="name">
                               {plan.name}
                             </h2>
-                            <p className={`text-xs ${colors.textLight}`}>
+                            <p className={`text-xs ${colors.textLight}`} itemProp="description">
                               {plan.tagline}
                             </p>
                           </div>
@@ -281,10 +298,10 @@ const PricingSection = () => {
                       {/* Price */}
                       <div className="mb-6 pb-4 border-b border-white/10">
                         <div className="flex items-baseline">
-                          <span className={`text-3xl font-bold ${colors.text}`} itemProp="price">
+                          <span className={`text-3xl font-bold ${colors.text}`}>
                             {plan.price}
                           </span>
-                          <span className={`text-base ml-1 ${colors.textLight}`} itemProp="priceCurrency">
+                          <span className={`text-base ml-1 ${colors.textLight}`}>
                             {plan.period}
                           </span>
                         </div>
@@ -327,7 +344,7 @@ const PricingSection = () => {
 
                       {/* Description */}
                       <div className="mb-6 p-3 rounded-lg bg-white/5">
-                        <p className={`text-xs ${colors.textLight}`} itemProp="description">
+                        <p className={`text-xs ${colors.textLight}`}>
                           {plan.description}
                         </p>
                       </div>
@@ -345,7 +362,6 @@ const PricingSection = () => {
                             : "bg-gradient-to-r from-primary to-primary/80 text-white hover:shadow-md hover:shadow-primary/30"
                         }`}
                         aria-label={`Wybierz pakiet ${plan.name} za ${plan.price} zł`}
-                        itemProp="url"
                       >
                         <MailIcon size={14} className="inline mr-2" />
                         Skontaktuj się
@@ -358,19 +374,29 @@ const PricingSection = () => {
           })}
         </div>
 
-        {/* Hidden SEO Content */}
-        <div className="mt-8 sr-only">
-          <h2>Cennik tworzenia stron internetowych WebBoss</h2>
+        {/* Hidden SEO Content - poprawione */}
+        <div className="sr-only" aria-hidden="true">
+          <h2>Cennik tworzenia stron internetowych WebBoss Warszawa</h2>
           <p>
-            Oferujemy przystępny cennik tworzenia stron internetowych dla firm i przedsiębiorców. 
+            Oferujemy przystępny cennik tworzenia stron internetowych dla firm i przedsiębiorców z Warszawy. 
             Nasze pakiety są kompleksowe i zawierają wszystkie niezbędne elementy do skutecznej 
-            obecności online. Ceny są przejrzyste i konkurencyjne na rynku.
+            obecności online. Ceny są przejrzyste i konkurencyjne na rynku warszawskim.
           </p>
-          <ul>
-            <li>Landing Page - idealna na start dla małych firm</li>
-            <li>Strona firmowa - kompleksowe rozwiązanie dla przedsiębiorców</li>
-            <li>Pakiet premium - zaawansowana strona dla wymagających klientów</li>
-          </ul>
+          <h3>Landing Page - idealna na start</h3>
+          <p>
+            Pakiet Landing Page to doskonały wybór dla firm, które chcą szybko pojawić się w internecie. 
+            Strona jednostronicowa z optymalizacją SEO, idealna do promocji usług i zbierania zapytań.
+          </p>
+          <h3>Strona firmowa - kompleksowe rozwiązanie</h3>
+          <p>
+            Najczęściej wybierany pakiet przez firmy z Warszawy. Zawiera wszystkie niezbędne elementy 
+            do profesjonalnej prezentacji firmy online z optymalizacją pod kątem konwersji.
+          </p>
+          <h3>Pakiet Premium - zaawansowane rozwiązania</h3>
+          <p>
+            Dla wymagających klientów, którzy chcą wyróżnić się wizualnie. Zaawansowane animacje, 
+            premium design i pełne wsparcie w zarządzaniu projektem.
+          </p>
           <p>
             Każdy pakiet obejmuje hosting, domenę, certyfikat SSL i optymalizację SEO. 
             Oferujemy także indywidualne wyceny dla niestandardowych projektów.

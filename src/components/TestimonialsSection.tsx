@@ -11,7 +11,8 @@ const testimonials = [
     text: "Profesjonalne podejście i świetny efekt końcowy. Strona przyciąga nowych klientów każdego dnia!",
     rating: 5,
     avatar: "A",
-    seoDescription: "Klientka z salonu kosmetycznego o profesjonalnej stronie internetowej"
+    location: "Warszawa",
+    industry: "kosmetyczna"
   },
   {
     name: "Marek Nowak",
@@ -19,23 +20,26 @@ const testimonials = [
     text: "WebBoss stworzył dla nas stronę, która idealnie oddaje charakter naszej działalności. Polecam!",
     rating: 5,
     avatar: "M",
-    seoDescription: "Opinia klienta z branży motoryzacyjnej o stworzonej stronie WWW"
+    location: "Warszawa",
+    industry: "motoryzacyjna"
   },
   {
     name: "Katarzyna Wiśniewska",
-    company: "Kancelaria Prawna",
+    company: "Kancelaria Prawna Lex",
     text: "Szybka realizacja, doskonała komunikacja i strona, która wzbudza zaufanie klientów.",
     rating: 5,
     avatar: "K",
-    seoDescription: "Recenzja prawniczki o stronie internetowej dla kancelarii"
+    location: "Warszawa",
+    industry: "prawna"
   },
   {
     name: "Piotr Zieliński",
-    company: "Usługi Remontowe",
+    company: "Zieliński Remonty",
     text: "Dzięki nowej stronie liczba zapytań wzrosła o 200%. Najlepsza inwestycja w biznes!",
     rating: 5,
     avatar: "P",
-    seoDescription: "Opinia przedsiębiorcy z branży remontowej o skuteczności strony"
+    location: "Warszawa",
+    industry: "budowlana"
   },
   {
     name: "Magdalena Dąbrowska",
@@ -43,7 +47,8 @@ const testimonials = [
     text: "Piękny design i funkcjonalność. Klienci często chwalą naszą stronę!",
     rating: 5,
     avatar: "M",
-    seoDescription: "Recenzja właścicielki salonu fryzjerskiego o projekcie strony"
+    location: "Warszawa",
+    industry: "fryzjerska"
   },
 ];
 
@@ -91,18 +96,29 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section 
-      id="opinie" 
-      className="section-padding relative z-10" 
+    <section
+      id="opinie"
+      className="section-padding relative z-10"
       ref={ref}
-      itemScope
-      itemType="https://schema.org/WebPage"
     >
       <div className="container-custom">
-        {/* Schema.org for Testimonials */}
-        <div className="sr-only" itemScope itemType="https://schema.org/ItemList">
-          <meta itemProp="name" content="Opinie klientów WebBoss" />
-          <meta itemProp="description" content="Recenzje i opinie zadowolonych klientów o stronach internetowych" />
+        {/* Schema.org for LocalBusiness */}
+        <div className="sr-only" itemScope itemType="https://schema.org/LocalBusiness">
+          <meta itemProp="name" content="WebBoss - Tworzenie stron internetowych Warszawa" />
+          <meta itemProp="description" content="Profesjonalne tworzenie stron internetowych dla firm w Warszawie" />
+          <link itemProp="url" href="https://webbosswarszawa.com" />
+          <meta itemProp="telephone" content="+48-xxx-xxx-xxx" />
+          <meta itemProp="email" content="kontakt@webbosswarszawa.com" />
+          <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+            <meta itemProp="addressLocality" content="Warszawa" />
+            <meta itemProp="addressCountry" content="Polska" />
+          </div>
+          <meta itemProp="priceRange" content="1000-5000 PLN" />
+          <div itemProp="aggregateRating" itemScope itemType="https://schema.org/AggregateRating">
+            <meta itemProp="ratingValue" content="5.0" />
+            <meta itemProp="ratingCount" content="23" />
+            <meta itemProp="bestRating" content="5" />
+          </div>
         </div>
 
         {/* Header */}
@@ -118,13 +134,13 @@ const TestimonialsSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="inline-block text-sm font-semibold text-primary uppercase tracking-wider mb-4"
           >
-            Opinie klientów
+            Referencje i opinie
           </motion.span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-            Opinie o <span className="text-gradient-primary">stronach internetowych</span> WebBoss
-          </h2>
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            Opinie klientów o <span className="text-gradient-primary">WebBoss Warszawa</span>
+          </h1>
           <p className="text-xl text-muted-foreground">
-            Zobacz, co mówią klienci o naszych realizacjach stron internetowych
+            Sprawdź, co mówią przedsiębiorcy z Warszawy o współpracy przy tworzeniu ich stron internetowych
           </p>
         </motion.div>
 
@@ -137,11 +153,27 @@ const TestimonialsSection = () => {
         >
           <div className="relative">
             {/* Testimonial Card */}
-            <div 
-              className="glass-card rounded-3xl p-8 md:p-12 lg:p-16 overflow-hidden"
-              itemScope
-              itemType="https://schema.org/Review"
-            >
+            <div className="glass-card rounded-3xl p-8 md:p-12 lg:p-16 overflow-hidden">
+              {/* Schema.org for Review - tylko dla aktualnie wyświetlanej opinii */}
+              <div className="sr-only" itemScope itemType="https://schema.org/Review">
+                <meta itemProp="name" content={`Opinia: ${testimonials[current].name} - ${testimonials[current].company}`} />
+                <link itemProp="url" href={`https://webbosswarszawa.com/opinie#opinia-${current}`} />
+                <div itemProp="author" itemScope itemType="https://schema.org/Person">
+                  <meta itemProp="name" content={testimonials[current].name} />
+                  <meta itemProp="jobTitle" content="Właściciel firmy" />
+                </div>
+                <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Service">
+                  <meta itemProp="name" content="Tworzenie strony internetowej" />
+                  <meta itemProp="serviceType" content="Web Development" />
+                </div>
+                <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                  <meta itemProp="ratingValue" content={testimonials[current].rating.toString()} />
+                  <meta itemProp="bestRating" content="5" />
+                </div>
+                <meta itemProp="reviewBody" content={testimonials[current].text} />
+                <meta itemProp="datePublished" content="2024-01-15" />
+              </div>
+
               <Quote className="w-16 h-16 text-primary/10 mb-8" />
 
               <AnimatePresence mode="wait" custom={direction}>
@@ -153,63 +185,40 @@ const TestimonialsSection = () => {
                   animate="center"
                   exit="exit"
                   transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  itemScope
-                  itemType="https://schema.org/Review"
                 >
-                  {/* Hidden SEO data */}
-                  <div className="sr-only">
-                    <meta itemProp="author" content={testimonials[current].name} />
-                    <meta itemProp="description" content={testimonials[current].seoDescription} />
-                    <meta itemProp="itemReviewed" content="Strona internetowa" />
-                  </div>
-
                   {/* Quote */}
-                  <p 
-                    className="text-xl md:text-2xl lg:text-3xl text-foreground font-medium leading-relaxed mb-10"
-                    itemProp="reviewBody"
-                  >
+                  <blockquote className="text-xl md:text-2xl lg:text-3xl text-foreground font-medium leading-relaxed mb-10">
                     "{testimonials[current].text}"
-                  </p>
+                  </blockquote>
 
-                  {/* Rating */}
-                  <div 
-                    className="flex items-center gap-1.5 mb-6"
-                    itemProp="reviewRating"
-                    itemScope
-                    itemType="https://schema.org/Rating"
-                  >
-                    <meta itemProp="ratingValue" content="5" />
-                    <meta itemProp="bestRating" content="5" />
+                  {/* Rating - tylko wizualne */}
+                  <div className="flex items-center gap-1.5 mb-6">
                     {[...Array(testimonials[current].rating)].map((_, i) => (
                       <Star
                         key={i}
                         size={20}
                         className="fill-accent text-accent"
+                        aria-hidden="true"
                       />
                     ))}
+                    <span className="sr-only">Ocena: {testimonials[current].rating} na 5 gwiazdek</span>
                   </div>
 
                   {/* Author */}
                   <div className="flex items-center gap-4">
                     <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center text-primary-foreground text-xl font-bold">
                       {testimonials[current].avatar}
+                      <span className="sr-only">{testimonials[current].name}</span>
                     </div>
                     <div>
-                      <div 
-                        className="font-bold text-lg text-foreground"
-                        itemProp="author"
-                        itemScope
-                        itemType="https://schema.org/Person"
-                      >
-                        <span itemProp="name">{testimonials[current].name}</span>
+                      <div className="font-bold text-lg text-foreground">
+                        {testimonials[current].name}
                       </div>
-                      <div 
-                        className="text-muted-foreground"
-                        itemProp="worksFor"
-                        itemScope
-                        itemType="https://schema.org/Organization"
-                      >
-                        <span itemProp="name">{testimonials[current].company}</span>
+                      <div className="text-muted-foreground">
+                        {testimonials[current].company}, {testimonials[current].location}
+                      </div>
+                      <div className="text-sm text-gray-500 mt-1">
+                        Branża: {testimonials[current].industry}
                       </div>
                     </div>
                   </div>
@@ -245,6 +254,7 @@ const TestimonialsSection = () => {
                         : "bg-border hover:bg-muted-foreground w-2.5"
                     }`}
                     aria-label={`Przejdź do opinii ${index + 1}`}
+                    aria-current={index === current ? "true" : "false"}
                   />
                 ))}
               </div>
@@ -262,11 +272,37 @@ const TestimonialsSection = () => {
           </div>
         </motion.div>
 
-        {/* Hidden SEO content - minimalne */}
+        {/* Lista wszystkich opinii ukryta dla SEO */}
+        <div className="sr-only" aria-hidden="true">
+          <h2>Referencje od klientów WebBoss Warszawa</h2>
+          <p>Poniżej przedstawiamy opinie przedsiębiorców z Warszawy, którzy skorzystali z naszych usług tworzenia stron internetowych.</p>
+          
+          <div itemScope itemType="https://schema.org/ItemList">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} itemProp="itemListElement" itemScope itemType="https://schema.org/Review">
+                <h3 itemProp="name">Opinia: {testimonial.name} - {testimonial.company}</h3>
+                <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                  Ocena: <span itemProp="ratingValue">{testimonial.rating}</span>/5
+                </div>
+                <p itemProp="reviewBody">{testimonial.text}</p>
+                <div itemProp="author" itemScope itemType="https://schema.org/Person">
+                  Autor: <span itemProp="name">{testimonial.name}</span>
+                </div>
+                <div itemProp="itemReviewed" itemScope itemType="https://schema.org/Service">
+                  Usługa: Tworzenie strony internetowej dla firmy z branży {testimonial.industry}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Dodatkowe informacje dla SEO */}
         <div className="sr-only">
-          <h3>Opinie o stronach internetowych WebBoss</h3>
+          <h3>WebBoss - zaufany partner w tworzeniu stron internetowych w Warszawie</h3>
           <p>
-            Nasi klienci z różnych branż dzielą się swoimi doświadczeniami ze współpracy przy tworzeniu stron internetowych.
+            Nasze strony internetowe otrzymują pozytywne opinie od klientów z różnych branż: kosmetycznej, motoryzacyjnej, 
+            prawnej, budowlanej i fryzjerskiej. Specjalizujemy się w tworzeniu skutecznych stron WWW dla firm z Warszawy, 
+            które przekładają się na realne wyniki biznesowe.
           </p>
         </div>
       </div>
